@@ -16,7 +16,7 @@ const schema = Yup.object({
   confirmPassword: Yup.string().required(),
 });
 
-interface IValues {
+export interface IValues {
   name: string;
   email: string;
   password: string;
@@ -111,7 +111,13 @@ export default function RegisterForm({ initialValues, onSubmit }: IProps) {
                   );
                 }}
               </Field>
-              <Button>Create account</Button>
+              <Button
+                isLoading={formProps.isSubmitting}
+                loadingText="Creating user..."
+                type="submit"
+              >
+                Create account
+              </Button>
             </Stack>
           </Form>
         );

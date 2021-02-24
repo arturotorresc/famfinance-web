@@ -1,9 +1,15 @@
 import Head from "next/head";
-import { Flex, Box } from "@chakra-ui/react";
+import { useMutation } from "react-query";
+import fetcher from "../../../fetchers/fetcher";
+import { Flex, Box, useToast, toast } from "@chakra-ui/react";
 import FeaturesText from "./FeaturesText";
-import RegisterForm from "./RegisterForm";
+import RegisterForm, { IValues } from "./RegisterForm";
 
 export default function Register() {
+  const mutation = useMutation((userData: IValues) =>
+    fetcher.post("/api/users", userData)
+  );
+  const toast = useToast();
   return (
     <Flex flexDir="column">
       <Head>
@@ -29,7 +35,36 @@ export default function Register() {
             password: "",
             confirmPassword: "",
           }}
-          onSubmit={(vals, actions) => {}}
+          onSubmit={(vals, actions) => {
+            mutation.mutate(
+              {
+                name: vals.name,
+                email: vals.email,
+                password: vals.password,
+                confirmPassword: vals.confirmPassword,
+              },
+              {
+                onSuccess: (res) => {
+                  toast({
+                    title: "Account created!",
+                    description:
+                      "You have succesfully registered with Famfinance, " +
+                      res.data.user.name,
+                    status: "success",
+                  });
+                  actions.setSubmitting(false);
+                },
+                onError: (error) => {
+                  toast({
+                    title: "Oops!",
+                    description: "An error has ocurred! Please try again!",
+                    status: "error",
+                  });
+                  actions.setSubmitting(false);
+                },
+              }
+            );
+          }}
         />
       </Flex>
     </Flex>
