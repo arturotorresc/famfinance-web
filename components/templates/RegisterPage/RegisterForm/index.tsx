@@ -13,7 +13,10 @@ const schema = Yup.object({
   name: Yup.string().required(),
   email: Yup.string().required(),
   password: Yup.string().required(),
-  confirmPassword: Yup.string().required(),
+  confirmPassword: Yup.string().oneOf(
+    [Yup.ref("password"), null],
+    "Passwords dont match!"
+  ),
 });
 
 export interface IValues {
@@ -79,7 +82,12 @@ export default function RegisterForm({ initialValues, onSubmit }: IProps) {
                       }
                     >
                       <FormLabel htmlFor="password">Password</FormLabel>
-                      <Input {...field} id="password" placeholder="Password" />
+                      <Input
+                        {...field}
+                        id="password"
+                        placeholder="Password"
+                        type="password"
+                      />
                       <FormErrorMessage>
                         {form.errors.password}
                       </FormErrorMessage>
@@ -103,6 +111,7 @@ export default function RegisterForm({ initialValues, onSubmit }: IProps) {
                         {...field}
                         id="confirmPassword"
                         placeholder="Confirm Password"
+                        type="password"
                       />
                       <FormErrorMessage>
                         {form.errors.confirmPassword}
