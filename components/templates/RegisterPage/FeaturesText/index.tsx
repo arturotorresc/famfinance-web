@@ -16,7 +16,12 @@ export default function FeaturesText(props: IProps) {
   const showText = useBreakpointValue<boolean>({ sm: false, md: true });
   return (
     <Box>
-      <Heading textAlign="center" fontSize="4xl" pb={6} pt={10}>
+      <Heading
+        textAlign="center"
+        fontSize={["4xl", null, "6xl"]}
+        pb={6}
+        pt={10}
+      >
         Register with Famfinance
       </Heading>
       {showText && (
