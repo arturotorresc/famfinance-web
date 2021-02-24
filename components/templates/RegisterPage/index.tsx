@@ -1,7 +1,7 @@
 import Head from "next/head";
 import { useMutation } from "react-query";
 import fetcher from "../../../fetchers/fetcher";
-import { Flex, Box, useToast, toast } from "@chakra-ui/react";
+import { Flex, Box, useToast } from "@chakra-ui/react";
 import FeaturesText from "./FeaturesText";
 import RegisterForm, { IValues } from "./RegisterForm";
 
