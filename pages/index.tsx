@@ -1,15 +1,10 @@
-import Head from "next/head";
-import { Box, Heading } from "@chakra-ui/react";
+import HomePage from "../components/templates/HomePage";
+import PublicLayout from "../components/layouts/PublicLayout";
 
-export default function HomePage() {
+export default function Home() {
   return (
-    <Box>
-      <Head>
-        <title>Welcome to Famfinance!</title>
-      </Head>
-      <Heading fontSize="5xl" textAlign="center" pt={20}>
-        Welcome to Famfinance!
-      </Heading>
-    </Box>
+    <PublicLayout>
+      <HomePage />
+    </PublicLayout>
   );
 }
