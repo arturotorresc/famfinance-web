@@ -3,7 +3,7 @@ import GoalBox from "./goalBox";
 import { useQuery } from "react-query";
 import fetcher from "../../../fetchers/fetcher";
 
-interface Goal{
+interface IGoal{
     _id: string,
     title: String,
     deadline: String,
@@ -11,14 +11,14 @@ interface Goal{
     qty: Number
 }
 
-interface Data{
-    goal: Goal[]
+interface IData{
+    goal: IGoal[]
 }
 
 export default function GoalStask(){
 
     const {status, data, error, isFetching} = useQuery('goals', async () => {
-        const { data } = await fetcher.get<Data>("/api/goal");
+        const { data } = await fetcher.get<IData>("/api/goal");
         return data;
     })
     

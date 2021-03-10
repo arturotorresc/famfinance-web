@@ -1,14 +1,14 @@
 import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
 import {Box, Heading, Text, Flex, VStack, IconButton } from "@chakra-ui/react";
 
-interface Props{
+interface IProps{
     title: String,
     deadline: String,
     description: String,
     qty: Number
 }
 
-export default function GoalBox(props: Props){
+export default function GoalBox(props: IProps){
     return(
         <Box p={5} shadow="md" borderWidth="1px">
             <Flex>
