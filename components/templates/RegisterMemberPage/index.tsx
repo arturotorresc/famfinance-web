@@ -43,9 +43,9 @@ export default function RegisterMember() {
                 {
                   onSuccess: (res) => {
                     toast({
-                      title: "Account created!",
+                      title: "Cuenta creada!",
                       description:
-                        "You have succesfully registered with Famfinance, " +
+                        "Te has registrado exitosamente a Famfinance, " +
                         res.data.user.name,
                       status: "success",
                     });
@@ -54,7 +54,7 @@ export default function RegisterMember() {
                   onError: (error) => {
                     toast({
                       title: "Oops!",
-                      description: "An error has ocurred! Please try again!",
+                      description: "Ha ocurrido un error! Por favor, intente de nuevo!",
                       status: "error",
                     });
                     actions.setSubmitting(false);
