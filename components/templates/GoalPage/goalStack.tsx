@@ -4,6 +4,7 @@ import { useQuery } from "react-query";
 import fetcher from "../../../fetchers/fetcher";
 
 interface Goal{
+    _id: string,
     title: String,
     deadline: String,
     description: String,
@@ -20,14 +21,14 @@ export default function GoalStask(){
         const { data } = await fetcher.get<Data>("/api/goal");
         return data;
     })
-
+    
     return(
         <Stack>
             {isFetching ? (
                 <div>Retrieving Information ...</div>
             ) : 
                 data?.goal.map(goal => (
-                    <GoalBox title={goal.title} description={goal.description} deadline={goal.deadline} qty={goal.qty}/>
+                    <GoalBox key={goal._id} title={goal.title} description={goal.description} deadline={goal.deadline} qty={goal.qty}/>
                 ))
             }
         </Stack>
