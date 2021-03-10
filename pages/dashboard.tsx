@@ -7,8 +7,8 @@ export default function Dashboard(props: IDashboardProps) {
   return <div>hola</div>;
 }
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const isLoggedIn = await checkIfLoggedIn();
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const isLoggedIn = await checkIfLoggedIn(ctx);
   if (!isLoggedIn) {
     return redirectToLogin();
   }

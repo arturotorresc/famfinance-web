@@ -1,7 +1,7 @@
 export function redirectToLogin() {
   return {
     redirect: {
-      destination: "/login",
+      destination: "/",
       permanent: false,
     },
   };
