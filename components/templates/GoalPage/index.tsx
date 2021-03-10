@@ -2,7 +2,7 @@ import Head from "next/head";
 import { Flex, Heading } from "@chakra-ui/react";
 import GoalStask from "./goalStack";
 
-export default function Register() {
+export default function Goal() {
   return (
     <Flex flexDir="column">
       <Head>
