@@ -1,4 +1,5 @@
 import { useMutation } from "react-query";
+import { useRouter } from "next/router";
 import fetcher from "../../../fetchers/fetcher";
 import Head from "next/head";
 import Image from "next/image";
@@ -14,6 +15,7 @@ import {
 import LoginForm, { IValues } from "./LoginForm";
 
 export default function HomePage() {
+  const router = useRouter();
   const mutation = useMutation((userData: IValues) =>
     fetcher.post("/login", userData)
   );
@@ -51,6 +53,7 @@ export default function HomePage() {
                   {
                     onSuccess: (res) => {
                       console.log(res);
+                      router.push("/dashboard");
                       actions.setSubmitting(false);
                     },
                     onError: (error) => {
