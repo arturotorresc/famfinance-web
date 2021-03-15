@@ -1,14 +1,23 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useState, useEffect } from "react";
+import { useQuery } from "react-query";
+import fetcher from "../fetchers/fetcher";
+
+interface IUserObject {
+  _id: string;
+  createdAt: string;
+  updatedAt: string;
+  email: string;
+  name: string;
+  role: string;
+}
 
 interface ICurrentUserContext {
-  user: any;
-  handleSetUser: (user: any) => void;
+  user: IUserObject | null;
   logout: () => void;
 }
 
 const defaultValue: ICurrentUserContext = {
   user: null,
-  handleSetUser: (user: any) => {},
   logout: () => {},
 };
 
@@ -22,15 +31,27 @@ export const CurrentUserContextProvider = ({
   children: React.ReactNode;
 }) => {
   const [user, setUser] = useState<any>(null);
+  const { data, isError, isLoading } = useQuery("/me", () =>
+    fetcher.get("/me").then((res) => res.data)
+  );
 
-  const handleSetUser = (user: any) => {
-    setUser(user);
-  };
+  useEffect(() => {
+    if (isLoading) {
+      setUser(null);
+    }
+
+    if (isError) {
+      setUser(null);
+    }
+
+    if (data) {
+      setUser(data.user);
+    }
+  }, [data, isError, isLoading]);
 
   const value = {
     user,
-    handleSetUser,
-    logout: () => handleSetUser({}),
+    logout: () => setUser(null),
   };
 
   return <Provider value={value}>{children}</Provider>;
