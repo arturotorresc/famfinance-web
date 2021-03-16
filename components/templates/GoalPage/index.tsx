@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { Flex, Heading } from "@chakra-ui/react";
-import GoalStask from "./goalStack";
+import GoalStask from "./GoalStack";
 
 export default function Goal() {
   return (

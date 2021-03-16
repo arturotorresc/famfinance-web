@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { useMutation } from "react-query";
-import fetcher from "../../../../fetchers/fetcher";
+import fetcher from "../../../fetchers/fetcher";
 import { Flex, Box, useToast, Heading } from "@chakra-ui/react";
 import CreateForm from "./CreateForm";
 
@@ -9,12 +9,11 @@ interface IValues{
   deadline: Date;
   description: string;
   qty: number;
-  belongsTo: String;
 }
 
 export default function CreateGoal() {
   const mutation = useMutation((goalData: IValues) =>
-    fetcher.post("/api/goal", goalData)
+    fetcher.post("/goal", goalData)
   );
   const toast = useToast();
   return (
@@ -55,8 +54,7 @@ export default function CreateGoal() {
                 title: vals.title,
                 description: vals.description,
                 deadline: vals.deadline,
-                qty: vals.qty,
-                belongsTo: "6036a74a0bf4d1d2948ad957"
+                qty: vals.qty
               },
               {
                 onSuccess: (res) => {

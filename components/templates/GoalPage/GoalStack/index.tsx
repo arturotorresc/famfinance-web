@@ -1,7 +1,7 @@
 import {Stack} from "@chakra-ui/react";
-import GoalBox from "./goalBox";
+import GoalBox from "../GoalBox";
 import { useQuery } from "react-query";
-import fetcher from "../../../fetchers/fetcher";
+import fetcher from "../../../../fetchers/fetcher";
 
 interface IGoal{
     _id: string,
@@ -18,7 +18,7 @@ interface IData{
 export default function GoalStask(){
 
     const {status, data, error, isFetching} = useQuery('goals', async () => {
-        const { data } = await fetcher.get<IData>("/api/goal");
+        const { data } = await fetcher.get<IData>("/goal");
         return data;
     })
     
