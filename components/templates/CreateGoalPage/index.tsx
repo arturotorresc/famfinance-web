@@ -3,6 +3,12 @@ import { useMutation } from "react-query";
 import fetcher from "../../../fetchers/fetcher";
 import { Flex, Box, useToast, Heading } from "@chakra-ui/react";
 import CreateForm from "./CreateForm";
+import { GetServerSideProps } from "next";
+import { checkIfLoggedIn } from "../../../lib/checkIfLoggedIn";
+import { redirectToLogin } from "../../../lib/redirectToLogin";
+import { IWithDehydratedState } from "../../../types/IWithDehydratedState";
+import { useCurrentUser } from "../../../hooks/useCurrentUser";
+import { dehydrate } from "react-query/hydration";
 
 interface IValues{
   title: string;
@@ -11,11 +17,21 @@ interface IValues{
   qty: number;
 }
 
+interface ICreateGoalProps extends IWithDehydratedState {}
+
 export default function CreateGoal() {
   const mutation = useMutation((goalData: IValues) =>
     fetcher.post("/goal", goalData)
   );
   const toast = useToast();
+
+  const { user } = useCurrentUser();
+
+  if (!user) {
+    return null;
+  }
+
+
   return (
     <Flex flexDir="column">
       <Head>
@@ -82,3 +98,14 @@ export default function CreateGoal() {
     </Flex>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const { isLoggedIn, queryClient } = await checkIfLoggedIn(ctx);
+  if (!isLoggedIn) {
+    return redirectToLogin();
+  }
+  const props: ICreateGoalProps = {
+    dehydratedState: dehydrate(queryClient),
+  };
+  return { props };
+};
