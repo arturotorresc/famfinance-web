@@ -2,6 +2,7 @@ import { useMutation } from "react-query";
 import { useRouter } from "next/router";
 import fetcher from "../../../fetchers/fetcher";
 import Head from "next/head";
+import Link from "next/link";
 import Image from "next/image";
 import {
   Box,
@@ -71,10 +72,14 @@ export default function HomePage() {
             />
             <Center flexDirection="column">
               <Button padding="10px 0px 0px 0px" variant="link">
-                Registrate
+                <Link href="/register">
+                  <a>Registrate</a>
+                </Link>
               </Button>
               <Button padding="10px 0px 0px 0px" variant="link">
-                Únete a tu familia
+                <Link href="/registerMember">
+                  <a>Únete a tu familia</a>
+                </Link>
               </Button>
             </Center>
           </Container>
