@@ -2,10 +2,13 @@ import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
 import {Box, Heading, Text, Flex, VStack, IconButton } from "@chakra-ui/react";
 
 interface IProps{
+    key: string,
+    _id: string,
     title: String,
     deadline: String,
     description: String,
-    qty: Number
+    qty: Number,
+    onDeleteClicked: (key: string) => void
 }
 
 export default function GoalBox(props: IProps){
@@ -21,7 +24,7 @@ export default function GoalBox(props: IProps){
                     <Text mt={4} fontSize="xl">${props.qty} MXN</Text>
                 </VStack>
                 <VStack >
-                    <IconButton  aria-label="delete" icon ={<DeleteIcon/>}/>
+                    <IconButton  aria-label="delete" icon ={<DeleteIcon/>} onClick={() => props.onDeleteClicked(props._id)}/>
                     <IconButton  aria-label="edit" icon ={<EditIcon/>}/>
                 </VStack>
             </Flex>
