@@ -10,6 +10,7 @@ import {
   Center,
   Container,
   Button,
+  Link,
   useToast,
 } from "@chakra-ui/react";
 import LoginForm, { IValues } from "./LoginForm";
@@ -70,12 +71,16 @@ export default function HomePage() {
               }}
             />
             <Center flexDirection="column">
-              <Button padding="10px 0px 0px 0px" variant="link">
-                Registrate
-              </Button>
-              <Button padding="10px 0px 0px 0px" variant="link">
-                Únete a tu familia
-              </Button>
+              <Link href="/register">
+                <Button padding="10px 0px 0px 0px" variant="link">
+                  Registrate
+                </Button>
+              </Link>
+              <Link href="/registerMember">
+                <Button padding="10px 0px 0px 0px" variant="link">
+                  Únete a tu familia
+                </Button>
+              </Link>
             </Center>
           </Container>
         </Center>
