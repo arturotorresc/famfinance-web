@@ -1,15 +1,16 @@
 import {Stack, useToast} from "@chakra-ui/react";
 import GoalBox from "../GoalBox";
 import { useMutation } from "react-query";
+import { useRouter } from "next/router";
 import { useQuery } from "react-query";
 import fetcher from "../../../../fetchers/fetcher";
 
 interface IGoal{
     _id: string;
-    title: String;
-    deadline: String;
-    description: String;
-    qty: Number;
+    title: string;
+    deadline: string;
+    description: string;
+    qty: number;
 }
 
 interface IData{
@@ -25,6 +26,8 @@ interface IDeleteData{
 }
 
 export default function GoalStask(){
+
+    const router = useRouter();
 
     const {status, data, error, isFetching, refetch} = useQuery('goals', async () => {
         const { data } = await fetcher.get<IData>("/goal");
@@ -61,6 +64,19 @@ export default function GoalStask(){
             }
         )
     }
+
+    function onUpdateClicked(_id: string, title: string, description: string, deadline: string, qty: number){
+        router.push({
+            pathname:"/updateGoal",
+            query: {
+                _id,
+                title,
+                description,
+                deadline,
+                qty
+            }
+        })
+    }
     
     return(
         <Stack>
@@ -68,7 +84,7 @@ export default function GoalStask(){
                 <div>Retrieving Information ...</div>
             ) : 
                 data?.goal.map(goal => (
-                    <GoalBox onDeleteClicked= {onDeleteClicked} key={goal._id} _id={goal._id} title={goal.title} description={goal.description} deadline={goal.deadline} qty={goal.qty}/>
+                    <GoalBox onDeleteClicked= {onDeleteClicked} onUpdateClicked= {onUpdateClicked} key={goal._id} _id={goal._id} title={goal.title} description={goal.description} deadline={goal.deadline} qty={goal.qty}/>
                 ))
             }
         </Stack>

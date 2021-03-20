@@ -4,11 +4,12 @@ import {Box, Heading, Text, Flex, VStack, IconButton } from "@chakra-ui/react";
 interface IProps{
     key: string,
     _id: string,
-    title: String,
-    deadline: String,
-    description: String,
-    qty: Number,
+    title: string,
+    deadline: string,
+    description: string,
+    qty: number,
     onDeleteClicked: (key: string) => void
+    onUpdateClicked: (_id: string, title: string, deadline: string, description: string, qty: number) => void
 }
 
 export default function GoalBox(props: IProps){
@@ -25,7 +26,7 @@ export default function GoalBox(props: IProps){
                 </VStack>
                 <VStack >
                     <IconButton  aria-label="delete" icon ={<DeleteIcon/>} onClick={() => props.onDeleteClicked(props._id)}/>
-                    <IconButton  aria-label="edit" icon ={<EditIcon/>}/>
+                    <IconButton  aria-label="edit" icon ={<EditIcon/>} onClick={() => props.onUpdateClicked(props._id, props.title, props.description, props.deadline, props.qty)}/>
                 </VStack>
             </Flex>
             
