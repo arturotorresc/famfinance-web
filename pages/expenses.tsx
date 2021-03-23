@@ -1,4 +1,4 @@
-import DashboardPage from "../components/templates/DashboardPage";
+import ExpensesPage from "../components/templates/ExpensesPage";
 import PrivateLayout from "../components/layouts/PrivateLayout";
 import { GetServerSideProps } from "next";
 import { checkIfLoggedIn } from "../lib/checkIfLoggedIn";
@@ -7,9 +7,9 @@ import { IWithDehydratedState } from "../types/IWithDehydratedState";
 import { useCurrentUser } from "../hooks/useCurrentUser";
 import { dehydrate } from "react-query/hydration";
 
-interface IDashboardProps extends IWithDehydratedState {}
+interface IExpensesProps extends IWithDehydratedState {}
 
-export default function Dashboard() {
+export default function Expenses() {
   const { user } = useCurrentUser();
 
   if (!user) {
@@ -18,7 +18,7 @@ export default function Dashboard() {
 
   return (
     <PrivateLayout>
-      <DashboardPage />
+      <ExpensesPage />
     </PrivateLayout>
   );
 }
@@ -28,7 +28,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   if (!isLoggedIn) {
     return redirectToLogin();
   }
-  const props: IDashboardProps = {
+  const props: IExpensesProps = {
     dehydratedState: dehydrate(queryClient),
   };
   return { props };

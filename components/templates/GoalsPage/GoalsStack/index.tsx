@@ -25,7 +25,7 @@ interface IDeleteData{
     data: IKey
 }
 
-export default function GoalStask(){
+export default function GoalsStack(){
 
     const router = useRouter();
 
@@ -48,9 +48,9 @@ export default function GoalStask(){
                 onSuccess: (res) => {
                     refetch();
                   toast({
-                    title: "Goal Deleted!",
+                    title: "Meta eliminada!",
                     description:
-                      "You have succesfully deleted the goal ",
+                      "Ha eliminado exitósamente una meta",
                     status: "success",
                   });
                 },
@@ -81,7 +81,7 @@ export default function GoalStask(){
     return(
         <Stack>
             {isFetching ? (
-                <div>Retrieving Information ...</div>
+                <div>Recuperando la información ...</div>
             ) : 
                 data?.goal.map(goal => (
                     <GoalBox onDeleteClicked= {onDeleteClicked} onUpdateClicked= {onUpdateClicked} key={goal._id} _id={goal._id} title={goal.title} description={goal.description} deadline={goal.deadline} qty={goal.qty}/>
