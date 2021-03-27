@@ -4,7 +4,7 @@ import {
   MenuButton,
   MenuItem,
   MenuList,
-  LinkOverlay,
+  Link,
   Box,
 } from "@chakra-ui/react";
 import { useCurrentUser } from "../../../../hooks/useCurrentUser";
@@ -16,7 +16,7 @@ export default function AccountMenu() {
   return (
     <Box margin="0px 20px 0px auto">
       <Menu>
-        <MenuButton as={LinkOverlay} color="#dce7f7">
+        <MenuButton as={Link} color="#dce7f7">
           {userName}
         </MenuButton>
         <MenuList>
