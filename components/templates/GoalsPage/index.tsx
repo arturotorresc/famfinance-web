@@ -1,13 +1,12 @@
 import Head from "next/head";
 import { Flex, Heading } from "@chakra-ui/react";
-import GoalStask from "./GoalStack";
+import GoalsStack from "./GoalsStack";
 
-export default function Goal() {
-
+export default function GoalsPage() {
   return (
     <Flex flexDir="column">
       <Head>
-        <title>Goals</title>
+        <title>Metas</title>
       </Head>
 
       <Heading
@@ -16,7 +15,7 @@ export default function Goal() {
         pb={6}
         pt={10}
       >
-        Goals
+        Metas
       </Heading>
 
       <Flex
@@ -28,7 +27,7 @@ export default function Goal() {
         mb={6}
         boxShadow="lg"
       >
-        <GoalStask></GoalStask>
+        <GoalsStack />
       </Flex>
     </Flex>
   );

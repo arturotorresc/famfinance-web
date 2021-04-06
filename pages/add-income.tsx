@@ -1,24 +1,17 @@
-import DashboardPage from "../components/templates/DashboardPage";
-import PrivateLayout from "../components/layouts/PrivateLayout";
 import { GetServerSideProps } from "next";
 import { checkIfLoggedIn } from "../lib/checkIfLoggedIn";
 import { redirectToLogin } from "../lib/redirectToLogin";
 import { IWithDehydratedState } from "../types/IWithDehydratedState";
-import { useCurrentUser } from "../hooks/useCurrentUser";
 import { dehydrate } from "react-query/hydration";
+import { AddIncome } from "../components/templates/AddIncome";
+import PrivateLayout from "../components/layouts/PrivateLayout";
 
-interface IDashboardProps extends IWithDehydratedState {}
+interface IAddIncomeProps extends IWithDehydratedState {}
 
-export default function Dashboard() {
-  const { user } = useCurrentUser();
-
-  if (!user) {
-    return null;
-  }
-
+export default function AddIncomePage(props: IAddIncomeProps) {
   return (
     <PrivateLayout>
-      <DashboardPage />
+      <AddIncome />
     </PrivateLayout>
   );
 }
@@ -28,7 +21,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   if (!isLoggedIn) {
     return redirectToLogin();
   }
-  const props: IDashboardProps = {
+  const props: IAddIncomeProps = {
     dehydratedState: dehydrate(queryClient),
   };
   return { props };

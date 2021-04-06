@@ -1,5 +1,5 @@
-import GoalPage from "../components/templates/GoalPage";
-import PublicLayout from "../components/layouts/PublicLayout";
+import IncomesPage from "../components/templates/IncomesPage";
+import PrivateLayout from "../components/layouts/PrivateLayout";
 import { GetServerSideProps } from "next";
 import { checkIfLoggedIn } from "../lib/checkIfLoggedIn";
 import { redirectToLogin } from "../lib/redirectToLogin";
@@ -7,10 +7,9 @@ import { IWithDehydratedState } from "../types/IWithDehydratedState";
 import { useCurrentUser } from "../hooks/useCurrentUser";
 import { dehydrate } from "react-query/hydration";
 
-interface IGoalProps extends IWithDehydratedState {}
+interface IIncomesProps extends IWithDehydratedState {}
 
-export default function Goal() {
-
+export default function Incomes() {
   const { user } = useCurrentUser();
 
   if (!user) {
@@ -18,9 +17,9 @@ export default function Goal() {
   }
 
   return (
-    <PublicLayout>
-      <GoalPage />
-    </PublicLayout>
+    <PrivateLayout>
+      <IncomesPage />
+    </PrivateLayout>
   );
 }
 
@@ -29,7 +28,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   if (!isLoggedIn) {
     return redirectToLogin();
   }
-  const props: IGoalProps = {
+  const props: IIncomesProps = {
     dehydratedState: dehydrate(queryClient),
   };
   return { props };

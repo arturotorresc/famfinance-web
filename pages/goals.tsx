@@ -1,5 +1,5 @@
-import DashboardPage from "../components/templates/DashboardPage";
 import PrivateLayout from "../components/layouts/PrivateLayout";
+import GoalsPage from "../components/templates/GoalsPage";
 import { GetServerSideProps } from "next";
 import { checkIfLoggedIn } from "../lib/checkIfLoggedIn";
 import { redirectToLogin } from "../lib/redirectToLogin";
@@ -7,9 +7,9 @@ import { IWithDehydratedState } from "../types/IWithDehydratedState";
 import { useCurrentUser } from "../hooks/useCurrentUser";
 import { dehydrate } from "react-query/hydration";
 
-interface IDashboardProps extends IWithDehydratedState {}
+interface IGoalsProps extends IWithDehydratedState {}
 
-export default function Dashboard() {
+export default function Goals() {
   const { user } = useCurrentUser();
 
   if (!user) {
@@ -18,7 +18,7 @@ export default function Dashboard() {
 
   return (
     <PrivateLayout>
-      <DashboardPage />
+      <GoalsPage />
     </PrivateLayout>
   );
 }
@@ -28,7 +28,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   if (!isLoggedIn) {
     return redirectToLogin();
   }
-  const props: IDashboardProps = {
+  const props: IGoalsProps = {
     dehydratedState: dehydrate(queryClient),
   };
   return { props };
