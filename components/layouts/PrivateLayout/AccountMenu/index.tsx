@@ -1,28 +1,42 @@
 import React from "react";
+import { useMutation } from "react-query";
+import { useRouter } from "next/router";
 import {
   Menu,
   MenuButton,
   MenuItem,
   MenuList,
-  Link,
+  Button,
   Box,
 } from "@chakra-ui/react";
 import { useCurrentUser } from "../../../../hooks/useCurrentUser";
+import fetcher from "../../../../fetchers/fetcher";
 
 export default function AccountMenu() {
   const { user } = useCurrentUser();
   const userName = user ? user.name : "Cuenta";
 
+  const router = useRouter();
+
+  const mutation = useMutation(() =>
+    fetcher.post("/logout")
+  );
+
+  const handleLogOut = () => {
+    mutation.mutate();
+    router.push("/");
+  };
+
   return (
     <Box margin="0px 20px 0px auto">
       <Menu>
-        <MenuButton as={Link} color="#dce7f7">
+        <MenuButton as={Button}>
           {userName}
         </MenuButton>
         <MenuList>
           <MenuItem>Mi Cuenta</MenuItem>
           <MenuItem>Administración de Miembros</MenuItem>
-          <MenuItem>Cerrar Sesión</MenuItem>
+          <MenuItem onClick={handleLogOut}>Cerrar Sesión</MenuItem>
         </MenuList>
       </Menu>
     </Box>
