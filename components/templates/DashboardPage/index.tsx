@@ -1,11 +1,12 @@
 import Head from "next/head";
 import { Flex, Heading } from "@chakra-ui/react";
+import { TransactionCharts } from "./TransactionCharts";
 
 export default function DashboardPage() {
   return (
     <Flex flexDir="column">
       <Head>
-        <title>Dashboard</title>
+        <title>Dashboard - Famfinance</title>
       </Head>
 
       <Heading
@@ -16,6 +17,7 @@ export default function DashboardPage() {
       >
         Dashboard
       </Heading>
+      <TransactionCharts />
     </Flex>
   );
 }
