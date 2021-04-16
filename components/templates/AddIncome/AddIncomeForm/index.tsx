@@ -95,6 +95,7 @@ export function AddIncomeForm(props: IProps) {
               <SelectIncomeType
                 formProps={formProps}
                 onChangeFormType={onChangeFormType}
+                setFieldValue={formProps.setFieldValue}
               />
               {extraFields(formType)}
               <Button isLoading={formProps.isSubmitting} type="submit">

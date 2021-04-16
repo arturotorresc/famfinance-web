@@ -12,8 +12,13 @@ import { IAddIncomeInitialValues, ISelectWeekDayProps } from "../interface";
 import { daysOfTheWeek } from "../../types";
 
 export function SelectWeekDay(props: ISelectWeekDayProps) {
-  const weekDaySelection = daysOfTheWeek.map((day) => {
-    return <Radio value={day}>{day}</Radio>;
+  const weekDaySelection = daysOfTheWeek.map((weekDay) => {
+    return (
+      <label key={weekDay}>
+        <Field type="radio" value={weekDay} name="weekDay" />
+        {weekDay}
+      </label>
+    );
   });
 
   return (
