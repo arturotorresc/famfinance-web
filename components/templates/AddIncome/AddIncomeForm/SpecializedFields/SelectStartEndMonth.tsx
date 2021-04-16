@@ -16,7 +16,12 @@ import { monthStartEnd } from "../../types";
 
 export function SelectStartEndMonth(props: ISelectStartEndMonthProps) {
   const startEndSelection = monthStartEnd.map((startEnd) => {
-    return <Radio value={startEnd}>{startEnd}</Radio>;
+    return (
+      <label key={startEnd}>
+        <Field type="radio" value={startEnd} name="startEndMonth" />
+        {startEnd}
+      </label>
+    );
   });
 
   return (
