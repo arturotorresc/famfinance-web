@@ -12,16 +12,31 @@ import {
   Flex,
   Center,
   HStack,
-  Heading,
-  Container,
+  Input,
   Button,
   useToast,
 } from "@chakra-ui/react";
+import { useState } from "react";
+import { Field, Form, Formik, FormikProps } from 'formik';
+
+interface IValues{
+  name: string
+}
 
 export default function ProfilePage() {
   const router = useRouter();
   const toast = useToast();
   const { user } = useCurrentUser();
+  const [isEditingName, setIsEditingName] = useState(false);
+
+  const handleEditName = () => {
+    setIsEditingName(true);
+  }
+
+  const mutation = useMutation((userData: IValues) =>
+    fetcher.put("/user", userData)
+  );
+
   return (
     <Box>
       <Head>
@@ -39,27 +54,61 @@ export default function ProfilePage() {
         <Box flex="8" alignItems="left">
             
             <Box flexDirection="column" alignItems="left">
+                {isEditingName && 
+                  (
+                  
+                    <Formik
+                      initialValues={{ name: user?.name }}
+                      onSubmit={(values, actions) => {
+                        setTimeout(() => {
+                          toast({
+                            title: "Nombre actualizado",
+                            description:
+                              "El nombre ha sido actualizado con exito",
+                            status: "success",
+                          });
+                          mutation.mutate({name: values.name!});
+                          actions.setSubmitting(false);
+                          location.reload();
+                        }, 1000);
+                      }}
+                    >
+                      <Form>
+                        <HStack pt={6}>
+                          <Field name="name"
+                            render={({ field /* { name, value, onChange, onBlur } */ }) => (
+                              <Input {...field} type="text" placeholder="name" fontSize="3xl" width="30" />
+                            )}/>
+                          <Button type="submit">Actualizar</Button>
+                        </HStack>
+                      </Form>
+                    </Formik>
+                  
+                  )
+                }
+                {!isEditingName && 
+                  (
+                  <HStack pt={6}>
+                    <Box fontSize="3xl" textAlign="left" >
+                      {user?.name}
+                    </Box>
+                    <IconButton  aria-label="edit" icon ={<EditIcon/>} onClick = {handleEditName}/>
+                  </HStack>
+                  )
+                }
+              
               <HStack pt={6}>
-                <Heading fontSize="3xl" textAlign="left" >
-                  {user?.name}
-                </Heading>
-                <IconButton  aria-label="edit" icon ={<EditIcon/>} />
-              </HStack>
-              <HStack pt={6}>
-                <Heading fontSize="3xl" textAlign="left" >
+                <Box fontSize="3xl" textAlign="left" >
                   {user?.role}
-                </Heading>
+                </Box>
               </HStack>
               <HStack pt={6}>
-                <Heading fontSize="3xl" textAlign="left" color="primary.500">
+                <Box fontSize="3xl" textAlign="left" color="primary.500">
                   {user?.email}
-                </Heading>
+                </Box>
               </HStack>
               <HStack pt={6}>
-                <Heading fontSize="3xl" textAlign="left" >
-                  Contraseña: ******* 
-                </Heading>
-                <IconButton  aria-label="edit" icon ={<EditIcon/>} />
+                <Button fontSize="xl" type="submit">Cambiar Contraseña</Button>
               </HStack>
             </Box>
         </Box>
