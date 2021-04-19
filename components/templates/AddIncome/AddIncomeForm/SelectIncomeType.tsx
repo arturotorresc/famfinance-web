@@ -1,5 +1,5 @@
-import React from "react";
-import { FormControl, FormLabel, Stack, Select } from "@chakra-ui/react";
+import React, { ChangeEvent } from "react";
+import { FormControl, FormLabel, Stack } from "@chakra-ui/react";
 import { Field, FieldProps } from "formik";
 import { IAddIncomeInitialValues, ISelectIncomeTypeProps } from "./interface";
 import { IncomeType } from "../types";
@@ -7,16 +7,21 @@ import { IncomeType } from "../types";
 export function SelectIncomeType(props: ISelectIncomeTypeProps) {
   return (
     <Stack spacing={3}>
-      <Field name="incomeFrequency">
+      <Field name="frequencyType">
         {({ field, form }: FieldProps<any, IAddIncomeInitialValues>) => {
           return (
             <FormControl>
-              <FormLabel htmlFor="incomeFrequency">
+              <FormLabel htmlFor="frequencyType">
                 Frecuencia de Ingreso
               </FormLabel>
-              <Select
+              <Field
+                as="select"
+                name="frequencyType"
                 placeholder="Selecciona una opción"
-                onChange={props.onChangeFormType}
+                onChange={(e: ChangeEvent<HTMLSelectElement>) => {
+                  props.onChangeFormType(e);
+                  props.setFieldValue("frequencyType", e.target.value);
+                }}
               >
                 <option value={IncomeType.OneTime}>{IncomeType.OneTime}</option>
                 <option value={IncomeType.SameDayRepeatMonths}>
@@ -34,7 +39,7 @@ export function SelectIncomeType(props: ISelectIncomeTypeProps) {
                 <option value={IncomeType.StartEndDaySelectedMonths}>
                   {IncomeType.StartEndDaySelectedMonths}
                 </option>
-              </Select>
+              </Field>
             </FormControl>
           );
         }}

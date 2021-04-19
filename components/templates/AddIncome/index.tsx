@@ -12,6 +12,7 @@ import {
 import fetcher from "../../../fetchers/fetcher";
 import { useMutation } from "react-query";
 import { AddIncomeForm } from "./AddIncomeForm";
+import { IncomeType } from "./types";
 
 export function AddIncome() {
   const mutation = useMutation((data: any) => fetcher.post("/income", data));
@@ -43,32 +44,38 @@ export function AddIncome() {
               title: "",
               quantity: 0,
               category: "",
-              startDate: "",
-              endDate: "",
-              day: 1,
-              weekDay: "",
-              weeksRepeat: 1,
-              monthsRepeat: 1,
-              months: [""],
-              startEndMonth: "",
+              startDate: null,
+              endDate: null,
+              frequencyType: IncomeType.OneTime,
+              day: null,
+              weekDay: null,
+              weeksRepeat: null,
+              monthsRepeat: null,
+              months: null,
+              startEndMonth: null,
             }}
             onSubmit={(vals, actions) => {
               const startDate = parseDate(
-                vals.startDate,
+                vals.startDate ? vals.startDate : "13-04-2021", // CHANGE TO TODAY
                 "dd-MM-yyyy",
                 new Date()
               );
-              const endDate = parseDate(vals.endDate, "dd-MM-yyyy", new Date());
+              const endDate = parseDate(
+                vals.endDate ? vals.endDate : "31-12-2040",
+                "dd-MM-yyyy",
+                new Date()
+              );
               const data = {
                 title: vals.title,
                 qty: vals.quantity,
                 category: vals.category,
                 from: startDate,
-                to: endDate,
+                until: endDate,
+                frequencyType: vals.frequencyType,
                 day: vals.day,
                 weekDay: vals.weekDay,
-                weeksRepear: vals.weeksRepeat,
-                monthsRepear: vals.monthsRepeat,
+                weeksRepeat: vals.weeksRepeat,
+                monthsRepeat: vals.monthsRepeat,
                 months: vals.months,
                 startEndMonth: vals.startEndMonth,
               };
