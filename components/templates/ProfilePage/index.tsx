@@ -3,7 +3,6 @@ import { useRouter } from "next/router";
 import fetcher from "../../../fetchers/fetcher";
 import Head from "next/head";
 import { useCurrentUser } from "../../../hooks/useCurrentUser";
-import Link from "next/link";
 import Image from "next/image";
 import { EditIcon } from "@chakra-ui/icons";
 import {
@@ -17,7 +16,7 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { useState } from "react";
-import { Field, Form, Formik, FormikProps } from 'formik';
+import { Field, Form, Formik } from 'formik';
 
 interface IValues{
   name: string
@@ -31,6 +30,10 @@ export default function ProfilePage() {
 
   const handleEditName = () => {
     setIsEditingName(true);
+  }
+
+  const handleUpdatePassword = () => {
+    router.push("/updatePassword");
   }
 
   const mutation = useMutation((userData: IValues) =>
@@ -108,7 +111,7 @@ export default function ProfilePage() {
                 </Box>
               </HStack>
               <HStack pt={6}>
-                <Button fontSize="xl" type="submit">Cambiar Contraseña</Button>
+                <Button fontSize="xl" type="submit" onClick={handleUpdatePassword}>Cambiar Contraseña</Button>
               </HStack>
             </Box>
         </Box>
