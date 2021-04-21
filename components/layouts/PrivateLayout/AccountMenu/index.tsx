@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import { useMutation } from "react-query";
 import { useRouter } from "next/router";
 import {
@@ -18,9 +19,7 @@ export default function AccountMenu() {
 
   const router = useRouter();
 
-  const mutation = useMutation(() =>
-    fetcher.post("/logout")
-  );
+  const mutation = useMutation(() => fetcher.post("/logout"));
 
   const handleLogOut = () => {
     mutation.mutate();
@@ -30,12 +29,14 @@ export default function AccountMenu() {
   return (
     <Box margin="0px 20px 0px auto">
       <Menu>
-        <MenuButton as={Button}>
-          {userName}
-        </MenuButton>
+        <MenuButton as={Button}>{userName}</MenuButton>
         <MenuList>
           <MenuItem>Mi Cuenta</MenuItem>
-          <MenuItem>Administración de Miembros</MenuItem>
+          <MenuItem>
+            <Link href="/admin/family">
+              <a>Administración de Miembros</a>
+            </Link>
+          </MenuItem>
           <MenuItem onClick={handleLogOut}>Cerrar Sesión</MenuItem>
         </MenuList>
       </Menu>
