@@ -27,6 +27,10 @@ export default function AccountMenu() {
     router.push("/");
   };
 
+  const handleProfile = () => {
+    router.push("/profile");
+  }
+
   return (
     <Box margin="0px 20px 0px auto">
       <Menu>
@@ -34,7 +38,7 @@ export default function AccountMenu() {
           {userName}
         </MenuButton>
         <MenuList>
-          <MenuItem>Mi Cuenta</MenuItem>
+          <MenuItem onClick={handleProfile}>Mi Cuenta</MenuItem>
           <MenuItem>Administración de Miembros</MenuItem>
           <MenuItem onClick={handleLogOut}>Cerrar Sesión</MenuItem>
         </MenuList>
