@@ -1,5 +1,6 @@
 import { FormikProps, FormikHelpers } from "formik";
 import { ChangeEventHandler } from "react";
+import { IncomeType } from "../types";
 
 interface IProps {
   initialValues: IAddIncomeInitialValues;
@@ -12,6 +13,7 @@ interface IProps {
 interface ISelectIncomeTypeProps {
   onChangeFormType: ChangeEventHandler<HTMLSelectElement>;
   formProps: FormikProps<IAddIncomeInitialValues>;
+  setFieldValue: (field: string, value: any, shouldValidate?: boolean) => void;
 }
 
 interface IBasicFormFieldsProps {
@@ -22,14 +24,15 @@ interface IAddIncomeInitialValues {
   title: string;
   quantity: number;
   category: string;
-  startDate: string;
-  endDate: string;
-  day: number;
-  weekDay: string;
-  weeksRepeat: number;
-  monthsRepeat: number;
-  months: [string];
-  startEndMonth: string;
+  startDate: string | null;
+  endDate: string | null;
+  frequencyType: IncomeType;
+  day: number | null;
+  weekDay: string | null;
+  weeksRepeat: number | null;
+  monthsRepeat: number | null;
+  months: [string] | null;
+  startEndMonth: string | null;
 }
 
 interface ISelectMultipleMonthsProps {

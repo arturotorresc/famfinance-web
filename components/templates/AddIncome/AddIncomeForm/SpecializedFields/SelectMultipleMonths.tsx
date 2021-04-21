@@ -3,7 +3,6 @@ import {
   FormControl,
   FormLabel,
   FormErrorMessage,
-  Checkbox,
   CheckboxGroup,
   Stack,
 } from "@chakra-ui/react";
@@ -16,11 +15,16 @@ import { months } from "../../types";
 
 export function SelectMultipleMonths(props: ISelectMultipleMonthsProps) {
   const monthSelection = months.map((month) => {
-    return <Checkbox value={month}>{month}</Checkbox>;
+    return (
+      <label key={month}>
+        <Field type="checkbox" value={month} name="months" />
+        {month}
+      </label>
+    );
   });
 
   return (
-    <Field name="incomeFrequency">
+    <Field name="months">
       {({ field, form }: FieldProps<any, IAddIncomeInitialValues>) => {
         return (
           <FormControl
