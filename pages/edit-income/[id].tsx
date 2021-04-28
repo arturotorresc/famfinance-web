@@ -1,17 +1,17 @@
 import { GetServerSideProps } from "next";
-import { checkIfLoggedIn } from "../lib/checkIfLoggedIn";
-import { redirectToLogin } from "../lib/redirectToLogin";
-import { IWithDehydratedState } from "../types/IWithDehydratedState";
+import { checkIfLoggedIn } from "../../lib/checkIfLoggedIn";
+import { redirectToLogin } from "../../lib/redirectToLogin";
+import { IWithDehydratedState } from "../../types/IWithDehydratedState";
 import { dehydrate } from "react-query/hydration";
-import { TransactionFormPage } from "../components/templates/TransactionFormPage";
-import PrivateLayout from "../components/layouts/PrivateLayout";
+import { TransactionFormPage } from "../../components/templates/TransactionFormPage";
+import PrivateLayout from "../../components/layouts/PrivateLayout";
 
 interface IIncomeFormPageProps extends IWithDehydratedState {}
 
-export default function AddIncomePage(props: IIncomeFormPageProps) {
+export default function EditIncomePage(props: IIncomeFormPageProps) {
   return (
     <PrivateLayout>
-      <TransactionFormPage query="add" transactionType="income" />
+      <TransactionFormPage query="edit" transactionType="income" />
     </PrivateLayout>
   );
 }

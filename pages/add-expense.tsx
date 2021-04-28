@@ -3,15 +3,15 @@ import { checkIfLoggedIn } from "../lib/checkIfLoggedIn";
 import { redirectToLogin } from "../lib/redirectToLogin";
 import { IWithDehydratedState } from "../types/IWithDehydratedState";
 import { dehydrate } from "react-query/hydration";
-import { AddTranSMonthFDay } from "../components/templates/AddTranSMonthFDay";
+import { TransactionFormPage } from "../components/templates/TransactionFormPage";
 import PrivateLayout from "../components/layouts/PrivateLayout";
 
-interface IAddTranSMonthFDayProps extends IWithDehydratedState {}
+interface IExpenseFormPageProps extends IWithDehydratedState {}
 
-export default function IAddTranSMonthFDayPage(props: IAddTranSMonthFDayProps) {
+export default function AddExpensePage(props: IExpenseFormPageProps) {
   return (
     <PrivateLayout>
-      <AddTranSMonthFDay />
+      <TransactionFormPage query="add" transactionType="expense" />
     </PrivateLayout>
   );
 }
@@ -21,7 +21,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   if (!isLoggedIn) {
     return redirectToLogin();
   }
-  const props: IAddTranSMonthFDayProps = {
+  const props: IExpenseFormPageProps = {
     dehydratedState: dehydrate(queryClient),
   };
   return { props };

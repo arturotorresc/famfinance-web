@@ -6,12 +6,12 @@ import {
   Input,
 } from "@chakra-ui/react";
 import { Field, FieldProps } from "formik";
-import { IAddIncomeInitialValues, ISelectDayProps } from "../interface";
+import { ITransactionInitialValues, ISelectDayProps } from "../interface";
 
 export function SelectDay(props: ISelectDayProps) {
   return (
     <Field name="day">
-      {({ field, form }: FieldProps<any, IAddIncomeInitialValues>) => {
+      {({ field, form }: FieldProps<any, ITransactionInitialValues>) => {
         return (
           <FormControl
             isInvalid={form.errors.day !== undefined && form.touched.day}

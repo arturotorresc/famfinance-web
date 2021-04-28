@@ -1,68 +1,68 @@
 import { FormikProps, FormikHelpers } from "formik";
 import { ChangeEventHandler } from "react";
-import { IncomeType } from "../types";
+import { FrequencyType } from "../types";
 
 interface IProps {
-  initialValues: IAddIncomeInitialValues;
+  initialValues: ITransactionInitialValues;
   onSubmit: (
-    vals: IAddIncomeInitialValues, // TODO: Add more
-    actions: FormikHelpers<IAddIncomeInitialValues> // TODO: Add more
+    vals: ITransactionInitialValues, // TODO: Add more
+    actions: FormikHelpers<ITransactionInitialValues> // TODO: Add more
   ) => void;
 }
 
-interface ISelectIncomeTypeProps {
+interface ISelectFrequencyTypeProps {
   onChangeFormType: ChangeEventHandler<HTMLSelectElement>;
-  formProps: FormikProps<IAddIncomeInitialValues>;
+  formProps: FormikProps<ITransactionInitialValues>;
   setFieldValue: (field: string, value: any, shouldValidate?: boolean) => void;
 }
 
 interface IBasicFormFieldsProps {
-  formProps: FormikProps<IAddIncomeInitialValues>;
+  formProps: FormikProps<ITransactionInitialValues>;
 }
 
-interface IAddIncomeInitialValues {
+interface ITransactionInitialValues {
   title: string;
   quantity: number;
   category: string;
   startDate: string | null;
   endDate: string | null;
-  frequencyType: IncomeType;
+  frequencyType: FrequencyType;
   day: number | null;
   weekDay: string | null;
   weeksRepeat: number | null;
   monthsRepeat: number | null;
-  months: [string] | null;
+  months: string[] | null;
   startEndMonth: string | null;
 }
 
 interface ISelectMultipleMonthsProps {
-  formProps: FormikProps<IAddIncomeInitialValues>;
+  formProps: FormikProps<ITransactionInitialValues>;
 }
 
 interface ISelectStartEndMonthProps {
-  formProps: FormikProps<IAddIncomeInitialValues>;
+  formProps: FormikProps<ITransactionInitialValues>;
 }
 
 interface ISelectDayProps {
-  formProps: FormikProps<IAddIncomeInitialValues>;
+  formProps: FormikProps<ITransactionInitialValues>;
 }
 
 interface ISelectWeekDayProps {
-  formProps: FormikProps<IAddIncomeInitialValues>;
+  formProps: FormikProps<ITransactionInitialValues>;
 }
 
 interface ISelectWeeksRepeatProps {
-  formProps: FormikProps<IAddIncomeInitialValues>;
+  formProps: FormikProps<ITransactionInitialValues>;
 }
 
 interface ISelectMonthsRepeatProps {
-  formProps: FormikProps<IAddIncomeInitialValues>;
+  formProps: FormikProps<ITransactionInitialValues>;
 }
 
 export type {
   IProps,
-  IAddIncomeInitialValues,
-  ISelectIncomeTypeProps,
+  ITransactionInitialValues,
+  ISelectFrequencyTypeProps,
   ISelectMultipleMonthsProps,
   IBasicFormFieldsProps,
   ISelectStartEndMonthProps,

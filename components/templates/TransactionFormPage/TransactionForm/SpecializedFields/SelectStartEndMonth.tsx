@@ -9,7 +9,7 @@ import {
 } from "@chakra-ui/react";
 import { Field, FieldProps } from "formik";
 import {
-  IAddIncomeInitialValues,
+  ITransactionInitialValues,
   ISelectStartEndMonthProps,
 } from "../interface";
 import { monthStartEnd } from "../../types";
@@ -26,7 +26,7 @@ export function SelectStartEndMonth(props: ISelectStartEndMonthProps) {
 
   return (
     <Field name="startEndMonth">
-      {({ field, form }: FieldProps<any, IAddIncomeInitialValues>) => {
+      {({ field, form }: FieldProps<any, ITransactionInitialValues>) => {
         return (
           <FormControl
             isInvalid={

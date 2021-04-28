@@ -3,12 +3,11 @@ import {
   FormControl,
   FormLabel,
   FormErrorMessage,
-  Radio,
   RadioGroup,
   Stack,
 } from "@chakra-ui/react";
 import { Field, FieldProps } from "formik";
-import { IAddIncomeInitialValues, ISelectWeekDayProps } from "../interface";
+import { ITransactionInitialValues, ISelectWeekDayProps } from "../interface";
 import { daysOfTheWeek } from "../../types";
 
 export function SelectWeekDay(props: ISelectWeekDayProps) {
@@ -23,7 +22,7 @@ export function SelectWeekDay(props: ISelectWeekDayProps) {
 
   return (
     <Field name="weekDay">
-      {({ field, form }: FieldProps<any, IAddIncomeInitialValues>) => {
+      {({ field, form }: FieldProps<any, ITransactionInitialValues>) => {
         return (
           <FormControl
             isInvalid={

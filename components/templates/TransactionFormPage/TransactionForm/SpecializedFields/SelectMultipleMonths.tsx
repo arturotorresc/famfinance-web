@@ -8,7 +8,7 @@ import {
 } from "@chakra-ui/react";
 import { Field, FieldProps } from "formik";
 import {
-  IAddIncomeInitialValues,
+  ITransactionInitialValues,
   ISelectMultipleMonthsProps,
 } from "../interface";
 import { months } from "../../types";
@@ -25,7 +25,7 @@ export function SelectMultipleMonths(props: ISelectMultipleMonthsProps) {
 
   return (
     <Field name="months">
-      {({ field, form }: FieldProps<any, IAddIncomeInitialValues>) => {
+      {({ field, form }: FieldProps<any, ITransactionInitialValues>) => {
         return (
           <FormControl
             isInvalid={
