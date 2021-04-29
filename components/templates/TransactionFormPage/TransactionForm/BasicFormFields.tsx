@@ -7,13 +7,13 @@ import {
   Stack,
 } from "@chakra-ui/react";
 import { Field, FieldProps } from "formik";
-import { IAddIncomeInitialValues, IBasicFormFieldsProps } from "./interface";
+import { ITransactionInitialValues, IBasicFormFieldsProps } from "./interface";
 
 export function BasicFormFields(props: IBasicFormFieldsProps) {
   return (
     <Stack spacing={3}>
       <Field name="title">
-        {({ field, form }: FieldProps<any, IAddIncomeInitialValues>) => {
+        {({ field, form }: FieldProps<any, ITransactionInitialValues>) => {
           return (
             <FormControl
               isInvalid={form.errors.title !== undefined && form.touched.title}
@@ -26,7 +26,7 @@ export function BasicFormFields(props: IBasicFormFieldsProps) {
         }}
       </Field>
       <Field name="quantity">
-        {({ field, form }: FieldProps<any, IAddIncomeInitialValues>) => {
+        {({ field, form }: FieldProps<any, ITransactionInitialValues>) => {
           return (
             <FormControl
               isInvalid={
@@ -41,7 +41,7 @@ export function BasicFormFields(props: IBasicFormFieldsProps) {
         }}
       </Field>
       <Field name="category">
-        {({ field, form }: FieldProps<any, IAddIncomeInitialValues>) => {
+        {({ field, form }: FieldProps<any, ITransactionInitialValues>) => {
           return (
             <FormControl
               isInvalid={
@@ -56,7 +56,7 @@ export function BasicFormFields(props: IBasicFormFieldsProps) {
         }}
       </Field>
       <Field name="startDate">
-        {({ field, form }: FieldProps<any, IAddIncomeInitialValues>) => {
+        {({ field, form }: FieldProps<any, ITransactionInitialValues>) => {
           return (
             <FormControl
               isInvalid={
@@ -72,7 +72,7 @@ export function BasicFormFields(props: IBasicFormFieldsProps) {
         }}
       </Field>
       <Field name="endDate">
-        {({ field, form }: FieldProps<any, IAddIncomeInitialValues>) => {
+        {({ field, form }: FieldProps<any, ITransactionInitialValues>) => {
           return (
             <FormControl
               isInvalid={

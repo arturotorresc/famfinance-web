@@ -28,7 +28,7 @@ enum MonthStartEnd {
   Fin = "Fin",
 }
 
-enum IncomeType {
+enum FrequencyType {
   OneTime = "Única ocasión",
   SameWeekDayRepeatForWeeks = "Recurrente: Mismo día de la semana cada N semanas",
   StartEndDayRepeatMonths = "Recurrente: Inicio o fin de mes cada N meses",
@@ -68,7 +68,7 @@ export {
   Month,
   DayOfTheWeek,
   MonthStartEnd,
-  IncomeType,
+  FrequencyType,
   months,
   daysOfTheWeek,
   monthStartEnd,

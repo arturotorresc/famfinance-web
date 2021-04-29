@@ -1,5 +1,6 @@
 import Head from "next/head";
 import { Flex, Heading } from "@chakra-ui/react";
+import IncomesStack from "./IncomesStack";
 
 export default function IncomesPage() {
   return (
@@ -16,6 +17,18 @@ export default function IncomesPage() {
       >
         Ingresos
       </Heading>
+
+      <Flex
+        w={["100%", null, "80%", null]}
+        mt={3}
+        mx="auto"
+        flexDir="column"
+        p={[3]}
+        mb={6}
+        boxShadow="lg"
+      >
+        <IncomesStack />
+      </Flex>
     </Flex>
   );
 }

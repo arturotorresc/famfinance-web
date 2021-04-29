@@ -6,12 +6,12 @@ import {
   Input,
 } from "@chakra-ui/react";
 import { Field, FieldProps } from "formik";
-import { IAddIncomeInitialValues, ISelectWeeksRepeatProps } from "../interface";
+import { ITransactionInitialValues, ISelectWeeksRepeatProps } from "../interface";
 
 export function SelectWeeksRepeat(props: ISelectWeeksRepeatProps) {
   return (
     <Field name="weeksRepeat">
-      {({ field, form }: FieldProps<any, IAddIncomeInitialValues>) => {
+      {({ field, form }: FieldProps<any, ITransactionInitialValues>) => {
         return (
           <FormControl
             isInvalid={
