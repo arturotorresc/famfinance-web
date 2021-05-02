@@ -33,7 +33,7 @@ export default function ProfilePage() {
   }
 
   const handleUpdatePassword = () => {
-    router.push("/updatePassword");
+    router.push("/update-password");
   }
 
   const mutation = useMutation((userData: IValues) =>

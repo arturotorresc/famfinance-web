@@ -1,85 +1,75 @@
 import Head from "next/head";
 import { useMutation } from "react-query";
 import fetcher from "../../../fetchers/fetcher";
-import { Flex, Box, useToast, Heading } from "@chakra-ui/react";
-import CreateForm from "./CreateForm";
+import { Flex, useToast } from "@chakra-ui/react";
+import CreateForm, { IValues } from "./CreateForm";
 
-interface IValues{
-  title: string;
-  deadline: Date;
-  description: string;
-  qty: number;
+function formatDate(date: Date) {
+  let day = date.getDate().toString();
+  let month = (date.getMonth() + 1).toString();
+  let year = date.getFullYear().toString();
+  if (day.length == 1) day = "0" + day;
+  if (month.length == 1) month = "0" + month;
+  return day + "-" + month + "-" + year;
 }
 
-export default function CreateGoal() {
-  const mutation = useMutation((goalData: IValues) =>
-    fetcher.post("/goal", goalData)
+export default function CreateGoalPage() {
+  const mutation = useMutation((userData: IValues) =>
+    fetcher.post("/goal", userData)
   );
   const toast = useToast();
-
   return (
-    <Flex flexDir="column">
+    <div>
       <Head>
-        <title>create | Goal</title>
+        <title>Agrega una Nueva Meta</title>
       </Head>
-
-      <Box w={["100%"]} px={1}>
-        <Heading
-          textAlign="center"
-          fontSize={["4xl", null, "6xl"]}
-          pb={6}
-          pt={10}
+      <Flex flexDir="column">
+        <Flex
+          w="550px"
+          mt={30}
+          mx="auto"
+          flexDir="column"
+          p={3}
+          mb={6}
         >
-          Create a new Goal
-        </Heading>
-      </Box>
-      <Flex
-        w={["100%", null, "80%", "550px"]}
-        mt={3}
-        mx="auto"
-        flexDir="column"
-        p={[3]}
-        mb={6}
-        boxShadow="lg"
-      >
-        <CreateForm
-          initialValues={{
-            title: "",
-            description: "",
-            deadline: new Date(),
-            qty: 0
-          }}
-          onSubmit={(vals, actions) => {
-            mutation.mutate(
-              {
-                title: vals.title,
-                description: vals.description,
-                deadline: vals.deadline,
-                qty: vals.qty
-              },
-              {
-                onSuccess: (res) => {
-                  toast({
-                    title: "Goal created!",
-                    description:
-                      "You have succesfully registered a new goal ",
-                    status: "success",
-                  });
-                  actions.setSubmitting(false);
+          <CreateForm
+            initialValues={{
+              title: "",
+              description: "",
+              qty: 0,
+              deadline: formatDate(new Date())
+            }}
+            onSubmit={(vals, actions) => {
+              mutation.mutate(
+                {
+                  title: vals.title,
+                  description: vals.description,
+                  qty: vals.qty,
+                  deadline: vals.deadline
                 },
-                onError: (error) => {
-                  toast({
-                    title: "Oops!",
-                    description: "An error has ocurred! Please try again!",
-                    status: "error",
-                  });
-                  actions.setSubmitting(false);
-                },
-              }
-            );
-          }}
-        />
+                {
+                  onSuccess: (res) => {
+                    toast({
+                      title: "Meta agregada!",
+                      description: "Se ha agregado una nueva meta exitosamente",
+                      status: "success",
+                    });
+                    actions.setSubmitting(false);
+                  },
+                  onError: (error) => {
+                    toast({
+                      title: "Oops!",
+                      description: "Ha ocurrido un error! Por favor, intente de nuevo!",
+                      status: "error",
+                    });
+                    actions.setSubmitting(false);
+                  },
+                }
+              );
+            }}
+          />
+        </Flex>
       </Flex>
-    </Flex>
+    </div>
   );
 }

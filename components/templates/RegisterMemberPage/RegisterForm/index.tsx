@@ -42,6 +42,7 @@ export default function RegisterForm({ initialValues, onSubmit }: IProps) {
       validationSchema={schema}
       initialValues={initialValues}
       onSubmit={onSubmit}
+      enableReinitialize
     >
       {(formProps) => {
         return (

@@ -3,12 +3,17 @@ import { useMutation } from "react-query";
 import fetcher from "../../../fetchers/fetcher";
 import { Flex, useToast } from "@chakra-ui/react";
 import RegisterForm, { IValues } from "./RegisterForm";
+import { useRouter } from "next/router";
 
 export default function RegisterMember() {
   const mutation = useMutation((userData: IValues) =>
     fetcher.post("/members", userData)
   );
   const toast = useToast();
+
+  const router = useRouter();
+  const familyId = (typeof router.query.familyId == "string")  ? router.query.familyId : "";
+
   return (
     <div>
       <Head>
@@ -29,7 +34,7 @@ export default function RegisterMember() {
               email: "",
               password: "",
               confirmPassword: "",
-              familyId: "",
+              familyId: familyId,
             }}
             onSubmit={(vals, actions) => {
               mutation.mutate(
