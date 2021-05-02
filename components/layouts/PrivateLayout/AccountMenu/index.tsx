@@ -35,13 +35,12 @@ export default function AccountMenu() {
       <Menu>
         <MenuButton as={Button}>{userName}</MenuButton>
         <MenuList>
-          <MenuItem>Mi Cuenta</MenuItem>
+        <MenuItem onClick={handleProfile}>Mi Cuenta</MenuItem>
           <MenuItem>
             <Link href="/admin/family">
               <a>Administración de Miembros</a>
             </Link>
           </MenuItem>
-          <MenuItem onClick={handleProfile}>Mi Cuenta</MenuItem>
           <MenuItem onClick={handleLogOut}>Cerrar Sesión</MenuItem>
         </MenuList>
       </Menu>

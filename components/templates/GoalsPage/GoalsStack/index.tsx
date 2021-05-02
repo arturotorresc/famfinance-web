@@ -57,7 +57,7 @@ export default function GoalsStack(){
                 onError: (error) => {
                   toast({
                     title: "Oops!",
-                    description: "An error has ocurred! Please try again!",
+                    description: "Ha ocurrido un error! Porfavor, intente de nuevo!",
                     status: "error",
                   });
                 },
@@ -67,7 +67,7 @@ export default function GoalsStack(){
 
     function onUpdateClicked(_id: string, title: string, description: string, deadline: string, qty: number){
         router.push({
-            pathname:"/updateGoal",
+            pathname:"/update-goal",
             query: {
                 _id,
                 title,
