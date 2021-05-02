@@ -6,7 +6,7 @@ import RegisterForm, { IValues } from "./RegisterForm";
 
 export default function RegisterMember() {
   const mutation = useMutation((userData: IValues) =>
-    fetcher.post("/api/members", userData)
+    fetcher.post("/members", userData)
   );
   const toast = useToast();
   return (

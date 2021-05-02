@@ -7,8 +7,7 @@ import {
   FormErrorMessage,
   Container,
   Heading,
-  Divider,
-  Box
+  Divider
 } from "@chakra-ui/react";
 import { Formik, FormikHelpers, Form, Field, FieldProps } from "formik";
 import * as Yup from "yup";
