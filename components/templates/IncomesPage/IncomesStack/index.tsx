@@ -73,7 +73,7 @@ export default function IncomesStack() {
   }
 
   function onUpdateClicked(_id: string){
-    var pathName = ("/income/").concat(_id);
+    var pathName = ("/edit-income/").concat(_id);
     router.push({
         pathname: pathName
     })

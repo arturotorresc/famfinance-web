@@ -73,7 +73,7 @@ export default function ExpensesStack() {
   }
 
   function onUpdateClicked(_id: string){
-    var pathName = ("/expense/").concat(_id);
+    var pathName = ("/edit-expense/").concat(_id);
     router.push({
         pathname: pathName
     })
