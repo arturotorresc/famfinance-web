@@ -70,7 +70,14 @@ export default function ExpensesStack() {
               },
         }
     )
-}
+  }
+
+  function onUpdateClicked(_id: string){
+    var pathName = ("/expense/").concat(_id);
+    router.push({
+        pathname: pathName
+    })
+  }
 
   return (
     <Stack>
@@ -79,7 +86,8 @@ export default function ExpensesStack() {
       ) : (
         data?.expense.map((expense) => (
           <ExpensesBox
-            onDeleteClicked= {onDeleteClicked}
+            onDeleteClicked = {onDeleteClicked}
+            onUpdateClicked = {onUpdateClicked}
             key={expense._id}
             _id={expense._id}
             title={expense.title}

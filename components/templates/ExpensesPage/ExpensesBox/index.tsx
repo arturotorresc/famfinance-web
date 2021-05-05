@@ -31,6 +31,7 @@ interface IProps{
     category: string,
     frequency: IFrequency,
     onDeleteClicked: (key: string) => void
+    onUpdateClicked: (_id: string) => void
 }
 
 export default function ExpensesBox(props: IProps){
@@ -107,7 +108,7 @@ export default function ExpensesBox(props: IProps){
                 </VStack>
                 <VStack >
                     <IconButton  aria-label="borrar" icon ={<DeleteIcon/>} onClick={() => props.onDeleteClicked(props._id)}/>
-                    <IconButton  aria-label="editar" icon ={<EditIcon/>} />
+                    <IconButton  aria-label="editar" icon ={<EditIcon/>} onClick={() => props.onUpdateClicked(props._id)}/>
                 </VStack>
             </Flex>
             <Divider margin="15px 5px" />
