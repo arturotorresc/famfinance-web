@@ -1,5 +1,5 @@
 import { Stack, useToast } from "@chakra-ui/react";
-import IncomesBox from "../IncomesBox";
+import ExpensesBox from "../ExpensesBox";
 import { useRouter } from "next/router";
 import fetcher from "../../../../fetchers/fetcher";
 import { useQuery, useMutation } from "react-query";
@@ -15,7 +15,7 @@ interface IFrequency {
     startEndMonth: string;
 }
 
-interface IIncome {
+interface IExpense {
   _id: string;
   title: string;
   from: string;
@@ -26,20 +26,20 @@ interface IIncome {
 }
 
 interface IData {
-  income: IIncome[];
+  expense: IExpense[];
 }
 
 interface IKey {
   _id: string;
 }
 
-export default function IncomesStack() {
+export default function ExpensesStack() {
   const router = useRouter();
 
   const { status, data, error, isFetching, refetch } = useQuery(
-    "incomes",
+    "expenses",
     async () => {
-      const { data } = await fetcher.get<IData>("/income");
+      const { data } = await fetcher.get<IData>("/expense");
       return data;
     }
   );
@@ -48,7 +48,7 @@ export default function IncomesStack() {
 
   const toast = useToast();
 
-  const deleteMutation = useMutation((id) => fetcher.delete(`/income/${id}`));
+  const deleteMutation = useMutation((id) => fetcher.delete(`/expense/${id}`));
 
   function onDeleteClicked(key: string) {
     deleteMutation.mutate(key, 
@@ -57,8 +57,8 @@ export default function IncomesStack() {
                 refetch();
                 toast({
                   status: "success",
-                  title: "Ingreso Borrado",
-                  description: `El Ingreso fue Borrado Exitosamente`,
+                  title: "Gasto Borrado",
+                  description: `El Gasto fue Borrado Exitosamente`,
                 });
               },
               onError: () => {
@@ -73,7 +73,7 @@ export default function IncomesStack() {
   }
 
   function onUpdateClicked(_id: string){
-    var pathName = ("/edit-income/").concat(_id);
+    var pathName = ("/edit-expense/").concat(_id);
     router.push({
         pathname: pathName
     })
@@ -84,18 +84,18 @@ export default function IncomesStack() {
       {isFetching ? (
         <div>Recuperando la información ...</div>
       ) : (
-        data?.income.map((income) => (
-          <IncomesBox
+        data?.expense.map((expense) => (
+          <ExpensesBox
             onDeleteClicked = {onDeleteClicked}
             onUpdateClicked = {onUpdateClicked}
-            key={income._id}
-            _id={income._id}
-            title={income.title}
-            from={income.from}
-            until={income.until}
-            qty={income.qty}
-            category={income.category}
-            frequency={income.frequency}
+            key={expense._id}
+            _id={expense._id}
+            title={expense.title}
+            from={expense.from}
+            until={expense.until}
+            qty={expense.qty}
+            category={expense.category}
+            frequency={expense.frequency}
           />
         ))
       )}

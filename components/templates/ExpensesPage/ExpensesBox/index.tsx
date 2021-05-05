@@ -34,7 +34,7 @@ interface IProps{
     onUpdateClicked: (_id: string) => void
 }
 
-export default function IncomesBox(props: IProps){
+export default function ExpensesBox(props: IProps){
     let selectedMonths = function (months: string[]){
         var monthsString = "";
         months.map((month) => (monthsString = monthsString.concat(month.concat(" "))));
