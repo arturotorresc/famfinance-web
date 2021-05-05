@@ -64,6 +64,14 @@ const daysOfTheWeek = [
 
 const monthStartEnd = [MonthStartEnd.Inicio, MonthStartEnd.Fin];
 
+enum TransactionCategoryEnum {
+  FOOD = "FOOD",
+  ENTERTAINMENT = "ENTERTAINMENT",
+  WORK = "WORK",
+  MISC = "MISC",
+  SUBSCRIPTION = "SUBSCRIPTION",
+}
+
 export {
   Month,
   DayOfTheWeek,
@@ -72,4 +80,5 @@ export {
   months,
   daysOfTheWeek,
   monthStartEnd,
+  TransactionCategoryEnum,
 };

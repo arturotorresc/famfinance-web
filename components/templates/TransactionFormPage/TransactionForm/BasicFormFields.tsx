@@ -5,9 +5,12 @@ import {
   FormLabel,
   FormErrorMessage,
   Stack,
+  Select,
 } from "@chakra-ui/react";
 import { Field, FieldProps } from "formik";
 import { ITransactionInitialValues, IBasicFormFieldsProps } from "./interface";
+import { TransactionCategoryEnum } from "../types";
+import { translateCategory } from "./helpers";
 
 export function BasicFormFields(props: IBasicFormFieldsProps) {
   return (
@@ -49,7 +52,15 @@ export function BasicFormFields(props: IBasicFormFieldsProps) {
               }
             >
               <FormLabel htmlFor="category">Categoría</FormLabel>
-              <Input {...field} id="category" />
+              <Select {...field} id="category">
+                {Object.keys(TransactionCategoryEnum).map((category) => {
+                  return (
+                    <option value={category}>
+                      {translateCategory(category as TransactionCategoryEnum)}
+                    </option>
+                  );
+                })}
+              </Select>
               <FormErrorMessage>{form.errors.category}</FormErrorMessage>
             </FormControl>
           );
