@@ -55,7 +55,7 @@ export function BasicFormFields(props: IBasicFormFieldsProps) {
               <Select {...field} id="category">
                 {Object.keys(TransactionCategoryEnum).map((category) => {
                   return (
-                    <option value={category}>
+                    <option key={category} value={category}>
                       {translateCategory(category as TransactionCategoryEnum)}
                     </option>
                   );
