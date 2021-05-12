@@ -1,18 +1,21 @@
+import { useEffect } from "react";
 import { Stack, useToast } from "@chakra-ui/react";
 import IncomesBox from "../IncomesBox";
 import { useRouter } from "next/router";
 import fetcher from "../../../../fetchers/fetcher";
 import { useQuery, useMutation } from "react-query";
+import { TransactionCategoryEnum } from "../../TransactionFormPage/types";
+import { SELECT_AN_OPTION_VALUE } from "../../../../constants";
 
 interface IFrequency {
-    _id: string;
-    frequencyType: string;
-    day: number;
-    weekDay: string;
-    weeksRepeat: number;
-    monthsRepeat: number;
-    months: string[];
-    startEndMonth: string;
+  _id: string;
+  frequencyType: string;
+  day: number;
+  weekDay: string;
+  weeksRepeat: number;
+  monthsRepeat: number;
+  months: string[];
+  startEndMonth: string;
 }
 
 interface IIncome {
@@ -29,17 +32,24 @@ interface IData {
   income: IIncome[];
 }
 
-interface IKey {
-  _id: string;
+interface IProps {
+  categoryFilter: TransactionCategoryEnum | typeof SELECT_AN_OPTION_VALUE;
 }
 
-export default function IncomesStack() {
+export default function IncomesStack({ categoryFilter }: IProps) {
   const router = useRouter();
 
   const { status, data, error, isFetching, refetch } = useQuery(
     "incomes",
     async () => {
-      const { data } = await fetcher.get<IData>("/income");
+      const { data } = await fetcher.get<IData>("/income", {
+        params:
+          categoryFilter === SELECT_AN_OPTION_VALUE
+            ? undefined
+            : {
+                category: categoryFilter,
+              },
+      });
       return data;
     }
   );
@@ -48,35 +58,39 @@ export default function IncomesStack() {
 
   const toast = useToast();
 
-  const deleteMutation = useMutation((id) => fetcher.delete(`/income/${id}`));
+  const deleteMutation = useMutation((id: string) =>
+    fetcher.delete(`/income/${id}`)
+  );
+
+  useEffect(() => {
+    refetch();
+  }, [categoryFilter]);
 
   function onDeleteClicked(key: string) {
-    deleteMutation.mutate(key, 
-          {
-            onSuccess: () => {
-                refetch();
-                toast({
-                  status: "success",
-                  title: "Ingreso Borrado",
-                  description: `El Ingreso fue Borrado Exitosamente`,
-                });
-              },
-              onError: () => {
-                toast({
-                  status: "error",
-                  title: "Oops! Algo Ocurrio!",
-                  description: "Por favor, intenta de nuevo!",
-                });
-              },
-        }
-    )
+    deleteMutation.mutate(key, {
+      onSuccess: () => {
+        refetch();
+        toast({
+          status: "success",
+          title: "Ingreso Borrado",
+          description: `El Ingreso fue Borrado Exitosamente`,
+        });
+      },
+      onError: () => {
+        toast({
+          status: "error",
+          title: "Oops! Algo Ocurrio!",
+          description: "Por favor, intenta de nuevo!",
+        });
+      },
+    });
   }
 
-  function onUpdateClicked(_id: string){
-    var pathName = ("/edit-income/").concat(_id);
+  function onUpdateClicked(_id: string) {
+    var pathName = "/edit-income/".concat(_id);
     router.push({
-        pathname: pathName
-    })
+      pathname: pathName,
+    });
   }
 
   return (
@@ -86,8 +100,8 @@ export default function IncomesStack() {
       ) : (
         data?.income.map((income) => (
           <IncomesBox
-            onDeleteClicked = {onDeleteClicked}
-            onUpdateClicked = {onUpdateClicked}
+            onDeleteClicked={onDeleteClicked}
+            onUpdateClicked={onUpdateClicked}
             key={income._id}
             _id={income._id}
             title={income.title}

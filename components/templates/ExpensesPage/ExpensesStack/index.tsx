@@ -1,18 +1,21 @@
+import { useEffect } from "react";
 import { Stack, useToast } from "@chakra-ui/react";
 import ExpensesBox from "../ExpensesBox";
 import { useRouter } from "next/router";
 import fetcher from "../../../../fetchers/fetcher";
 import { useQuery, useMutation } from "react-query";
+import { TransactionCategoryEnum } from "../../TransactionFormPage/types";
+import { SELECT_AN_OPTION_VALUE } from "../../../../constants";
 
 interface IFrequency {
-    _id: string;
-    frequencyType: string;
-    day: number;
-    weekDay: string;
-    weeksRepeat: number;
-    monthsRepeat: number;
-    months: string[];
-    startEndMonth: string;
+  _id: string;
+  frequencyType: string;
+  day: number;
+  weekDay: string;
+  weeksRepeat: number;
+  monthsRepeat: number;
+  months: string[];
+  startEndMonth: string;
 }
 
 interface IExpense {
@@ -32,14 +35,24 @@ interface IData {
 interface IKey {
   _id: string;
 }
+interface IProps {
+  categoryFilter: TransactionCategoryEnum | typeof SELECT_AN_OPTION_VALUE;
+}
 
-export default function ExpensesStack() {
+export default function ExpensesStack({ categoryFilter }: IProps) {
   const router = useRouter();
 
   const { status, data, error, isFetching, refetch } = useQuery(
     "expenses",
     async () => {
-      const { data } = await fetcher.get<IData>("/expense");
+      const { data } = await fetcher.get<IData>("/expense", {
+        params:
+          categoryFilter === SELECT_AN_OPTION_VALUE
+            ? undefined
+            : {
+                category: categoryFilter,
+              },
+      });
       return data;
     }
   );
@@ -48,35 +61,39 @@ export default function ExpensesStack() {
 
   const toast = useToast();
 
-  const deleteMutation = useMutation((id) => fetcher.delete(`/expense/${id}`));
+  const deleteMutation = useMutation((id: string) =>
+    fetcher.delete(`/expense/${id}`)
+  );
 
   function onDeleteClicked(key: string) {
-    deleteMutation.mutate(key, 
-          {
-            onSuccess: () => {
-                refetch();
-                toast({
-                  status: "success",
-                  title: "Gasto Borrado",
-                  description: `El Gasto fue Borrado Exitosamente`,
-                });
-              },
-              onError: () => {
-                toast({
-                  status: "error",
-                  title: "Oops! Algo Ocurrio!",
-                  description: "Por favor, intenta de nuevo!",
-                });
-              },
-        }
-    )
+    deleteMutation.mutate(key, {
+      onSuccess: () => {
+        refetch();
+        toast({
+          status: "success",
+          title: "Gasto Borrado",
+          description: `El Gasto fue Borrado Exitosamente`,
+        });
+      },
+      onError: () => {
+        toast({
+          status: "error",
+          title: "Oops! Algo Ocurrio!",
+          description: "Por favor, intenta de nuevo!",
+        });
+      },
+    });
   }
 
-  function onUpdateClicked(_id: string){
-    var pathName = ("/edit-expense/").concat(_id);
+  useEffect(() => {
+    refetch();
+  }, [categoryFilter]);
+
+  function onUpdateClicked(_id: string) {
+    var pathName = "/edit-expense/".concat(_id);
     router.push({
-        pathname: pathName
-    })
+      pathname: pathName,
+    });
   }
 
   return (
@@ -86,8 +103,8 @@ export default function ExpensesStack() {
       ) : (
         data?.expense.map((expense) => (
           <ExpensesBox
-            onDeleteClicked = {onDeleteClicked}
-            onUpdateClicked = {onUpdateClicked}
+            onDeleteClicked={onDeleteClicked}
+            onUpdateClicked={onUpdateClicked}
             key={expense._id}
             _id={expense._id}
             title={expense.title}
