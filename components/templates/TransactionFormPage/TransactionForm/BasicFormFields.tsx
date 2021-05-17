@@ -46,11 +46,7 @@ export function BasicFormFields(props: IBasicFormFieldsProps) {
       <Field name="category">
         {({ field, form }: FieldProps<any, ITransactionInitialValues>) => {
           return (
-            <FormControl
-              isInvalid={
-                form.errors.category !== undefined && form.touched.category
-              }
-            >
+            <FormControl>
               <FormLabel htmlFor="category">Categoría</FormLabel>
               <Select {...field} id="category">
                 {Object.keys(TransactionCategoryEnum).map((category) => {

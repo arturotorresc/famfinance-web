@@ -81,7 +81,7 @@ export function TransactionFormPage(props: IProps) {
   const [initialValues, setInitialValues] = useState({
     title: "",
     quantity: 0,
-    category: "",
+    category: "FOOD",
     startDate: formatDate(new Date()),
     endDate: formatDate(new Date()),
     frequencyType: FrequencyType.OneTime,
