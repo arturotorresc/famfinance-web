@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Stack, useToast } from "@chakra-ui/react";
+import { Stack, useToast, Button } from "@chakra-ui/react";
 import ExpensesBox from "../ExpensesBox";
 import { useRouter } from "next/router";
 import fetcher from "../../../../fetchers/fetcher";
@@ -96,6 +96,10 @@ export default function ExpensesStack({ categoryFilter }: IProps) {
     });
   }
 
+  function onCreateClicked(){
+    router.push("/add-expense");
+  }
+
   return (
     <Stack>
       {isFetching ? (
@@ -116,6 +120,7 @@ export default function ExpensesStack({ categoryFilter }: IProps) {
           />
         ))
       )}
+      <Button onClick={onCreateClicked} >Crear Nuevo Gasto</Button>
     </Stack>
   );
 }
