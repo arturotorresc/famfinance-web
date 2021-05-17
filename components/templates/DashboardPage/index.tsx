@@ -1,6 +1,7 @@
 import Head from "next/head";
 import { Flex, Heading } from "@chakra-ui/react";
 import { TransactionCharts } from "./TransactionCharts";
+import ForecastCharts from "./ForecastCharts";
 
 export default function DashboardPage() {
   return (
@@ -18,6 +19,9 @@ export default function DashboardPage() {
         Dashboard
       </Heading>
       <TransactionCharts />
+      <Flex width="100%" justifyContent="space-around">
+        <ForecastCharts />
+      </Flex>
     </Flex>
   );
 }
