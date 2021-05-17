@@ -119,7 +119,6 @@ export function TransactionFormPage(props: IProps) {
         fetcher
           .get<IIncomeData>("/income/" + id)
           .then((data) => {
-            console.log("received data: ", data);
             const transaction = data.data.income;
             setInitialValues({
               title: transaction.title,
@@ -145,7 +144,6 @@ export function TransactionFormPage(props: IProps) {
         fetcher
           .get<IExpenseData>("/expense/" + id)
           .then((data) => {
-            console.log("received data: ", data);
             const transaction = data.data.expense;
             setInitialValues({
               title: transaction.title,

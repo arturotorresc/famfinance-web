@@ -15,7 +15,6 @@ const schema = Yup.object({
       const parsedDate = isDate(originalVal)
         ? originalVal
         : parseDate(originalVal, "dd-MM-yyyy", new Date());
-      console.log(parsedDate);
       return parsedDate;
     })
     .required("Por favor introduzca una fecha en formato dd-MM-aaaa"),
@@ -27,7 +26,6 @@ const schema = Yup.object({
       const parsedDate = isDate(originalVal)
         ? originalVal
         : parseDate(originalVal, "dd-MM-yyyy", new Date());
-      console.log(parsedDate);
       return parsedDate;
     })
     .required("Por favor introduzca una fecha en formato dd-MM-aaaa"),
