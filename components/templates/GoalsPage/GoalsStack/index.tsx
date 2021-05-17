@@ -1,4 +1,4 @@
-import {Stack, useToast} from "@chakra-ui/react";
+import {Stack, useToast, Button} from "@chakra-ui/react";
 import GoalBox from "../GoalBox";
 import { useMutation } from "react-query";
 import { useRouter } from "next/router";
@@ -77,6 +77,10 @@ export default function GoalsStack(){
             }
         })
     }
+
+    function onCreateClicked(){
+        router.push("/add-goal");
+    }
     
     return(
         <Stack>
@@ -87,6 +91,7 @@ export default function GoalsStack(){
                     <GoalBox onDeleteClicked= {onDeleteClicked} onUpdateClicked= {onUpdateClicked} key={goal._id} _id={goal._id} title={goal.title} description={goal.description} deadline={goal.deadline} qty={goal.qty}/>
                 ))
             }
+            <Button onClick={onCreateClicked}>Crear Nueva Meta</Button>
         </Stack>
     );
 }

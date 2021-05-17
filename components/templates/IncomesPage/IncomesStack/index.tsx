@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Stack, useToast } from "@chakra-ui/react";
+import { Stack, useToast, Button } from "@chakra-ui/react";
 import IncomesBox from "../IncomesBox";
 import { useRouter } from "next/router";
 import fetcher from "../../../../fetchers/fetcher";
@@ -93,6 +93,10 @@ export default function IncomesStack({ categoryFilter }: IProps) {
     });
   }
 
+  function onCreateClicked(){
+    router.push("/add-income");
+  }
+
   return (
     <Stack>
       {isFetching ? (
@@ -113,6 +117,7 @@ export default function IncomesStack({ categoryFilter }: IProps) {
           />
         ))
       )}
+      <Button onClick={onCreateClicked}>Crear Nuevo Ingreso</Button>
     </Stack>
   );
 }
