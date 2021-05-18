@@ -8,17 +8,13 @@ import isAfter from "date-fns/isAfter";
 import fetcher from "../../../../fetchers/fetcher";
 
 export function TransactionCharts() {
-  const {
-    data: expenseData,
-    isLoading: expenseIsLoading,
-  } = useQuery("/expense/history", () =>
-    fetcher.get("/expense/history").then((res) => res.data)
+  const { data: expenseData, isLoading: expenseIsLoading } = useQuery(
+    "/expense/history",
+    () => fetcher.get("/expense/history").then((res) => res.data)
   );
-  const {
-    data: incomeData,
-    isLoading: incomeIsLoading,
-  } = useQuery("/income/history", () =>
-    fetcher.get("/income/history").then((res) => res.data)
+  const { data: incomeData, isLoading: incomeIsLoading } = useQuery(
+    "/income/history",
+    () => fetcher.get("/income/history").then((res) => res.data)
   );
 
   const expenseChartData = useMemo(() => {
@@ -100,28 +96,32 @@ export function TransactionCharts() {
       w="800px"
       mx="auto"
     >
-      <Box h="400px" w="800px">
-        <Text fontSize="2xl" mb={3} mt={10}>
-          Expenses history
-        </Text>
-        <Chart
-          primaryAxisType="utc"
-          data={expenseChartData}
-          axes={axes}
-          tooltip
-        />
-      </Box>
-      <Box pt={10} mt={12} h="400px" w="800px" pb={10}>
-        <Text fontSize="2xl" mb={3} mt={10}>
-          Income history
-        </Text>
-        <Chart
-          primaryAxisType="utc"
-          data={incomeChartData}
-          axes={axes}
-          tooltip
-        />
-      </Box>
+      {expenseData && expenseData.expenses.length > 0 && (
+        <Box h="400px" w="800px">
+          <Text fontSize="2xl" mb={3} mt={10}>
+            Historial de tus gastos
+          </Text>
+          <Chart
+            primaryAxisType="utc"
+            data={expenseChartData}
+            axes={axes}
+            tooltip
+          />
+        </Box>
+      )}
+      {incomeData && incomeData.incomes.length > 0 && (
+        <Box pt={10} mt={12} h="400px" w="800px" pb={10}>
+          <Text fontSize="2xl" mb={3} mt={10}>
+            Historial de tus ingresos
+          </Text>
+          <Chart
+            primaryAxisType="utc"
+            data={incomeChartData}
+            axes={axes}
+            tooltip
+          />
+        </Box>
+      )}
     </Flex>
   );
 }
