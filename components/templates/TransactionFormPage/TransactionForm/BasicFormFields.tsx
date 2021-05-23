@@ -72,7 +72,7 @@ export function BasicFormFields(props: IBasicFormFieldsProps) {
               }
             >
               <FormLabel htmlFor="startDate">Fecha de Inicio</FormLabel>
-              <Input {...field} id="startDate" placeholder="dd-MM-aaaa" />
+              <Input {...field} id="startDate" placeholder="dd-mm-aaaa" />
               <FormErrorMessage>{form.errors.startDate}</FormErrorMessage>
             </FormControl>
           );
@@ -88,7 +88,7 @@ export function BasicFormFields(props: IBasicFormFieldsProps) {
               }
             >
               <FormLabel htmlFor="endDate">Fecha de Terminación</FormLabel>
-              <Input {...field} id="endDate" placeholder="dd-MM-aaaa" />
+              <Input {...field} id="endDate" placeholder="dd-mm-aaaa" />
               <FormErrorMessage>{form.errors.startDate}</FormErrorMessage>
             </FormControl>
           );
