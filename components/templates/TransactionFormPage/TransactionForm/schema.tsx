@@ -30,7 +30,15 @@ const schema = Yup.object({
         : parseDate(originalVal, "dd-MM-yyyy", new Date());
       return parsedDate;
     })
-    .required("Campo requerido"),
+    .required("Campo requerido")
+    .typeError("Introduzca una fecha válida en formato dd-mm-aaaa")
+    .when("startDate", {
+      is: true,
+      then: Yup.date().min(
+        Yup.ref("startDate"),
+        "Fecha de Terminación debe ser después de la de Inicio"
+      ),
+    }),
   day: Yup.number()
     .integer("Introduzca un día válido")
     .min(1, "Introduzca un día valido")
