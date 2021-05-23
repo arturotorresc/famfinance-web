@@ -10,8 +10,11 @@ import {
   import * as Yup from "yup";
   
   const schema = Yup.object({
-    oldPassword: Yup.string().required("Campo requerido"),
-    newPassword: Yup.string().required("Campo requerido"),
+    oldPassword: Yup.string().min(6, "La contraseña debe tener al menos 6 caracteres").required("Campo requerido"),
+    newPassword: Yup.string().required("Campo requerido").oneOf(
+      [Yup.ref("oldPassword"), null],
+      "Las contraseñas no coinciden!"
+    ),
   });
   
   export interface IValues {
