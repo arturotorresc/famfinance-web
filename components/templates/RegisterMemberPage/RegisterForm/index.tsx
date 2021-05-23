@@ -11,11 +11,12 @@ import {
 } from "@chakra-ui/react";
 import { Formik, FormikHelpers, Form, Field, FieldProps } from "formik";
 import * as Yup from "yup";
+import { EMAIL_REGEX } from "../../../../constants";
 
 const schema = Yup.object({
   name: Yup.string().required("Campo requerido"),
-  email: Yup.string().required("Campo requerido"),
-  password: Yup.string().required("Campo requerido"),
+  email: Yup.string().matches(EMAIL_REGEX, "Debe introducir un correo electrónico válido").required("Campo requerido"),
+  password: Yup.string().min(6, "La contraseña debe tener al menos 6 caracteres").required("Campo requerido"),
   confirmPassword: Yup.string().oneOf(
     [Yup.ref("password"), null],
     "Las contraseñas no coinciden!"

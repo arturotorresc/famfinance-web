@@ -11,11 +11,12 @@ import {
 } from "@chakra-ui/react";
 import { Formik, FormikHelpers, Form, Field, FieldProps } from "formik";
 import * as Yup from "yup";
+import { EMAIL_REGEX } from "../../../../constants";
 
 const schema = Yup.object({
   email: Yup.string()
     .matches(
-      /^([a-zA-Z0-9.-_]+)@([a-zA-Z0-9.-_]+).([a-zA-Z]{2,5})$/,
+      EMAIL_REGEX,
       "Debe introducir un correo electrónico válido"
     )
     .required("Campo requerido"),

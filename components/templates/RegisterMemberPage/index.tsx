@@ -59,7 +59,7 @@ export default function RegisterMember() {
                   onError: (error) => {
                     toast({
                       title: "Oops!",
-                      description: "Ha ocurrido un error! Por favor, intente de nuevo!",
+                      description: "Ha ocurrido un error! Verifique que el ID de su familia sea correcto",
                       status: "error",
                     });
                     actions.setSubmitting(false);
