@@ -13,10 +13,10 @@ import { Formik, FormikHelpers, Form, Field, FieldProps } from "formik";
 import * as Yup from "yup";
 
 const schema = Yup.object({
-  title: Yup.string().required(),
-  description: Yup.string().required(),
-  qty: Yup.number().required(),
-  deadline: Yup.string().required()
+  title: Yup.string().required("Campo requerido"),
+  description: Yup.string().required("Campo requerido"),
+  qty: Yup.number().required("Campo requerido"),
+  deadline: Yup.string().required("Campo requerido")
 });
 
 export interface IValues {

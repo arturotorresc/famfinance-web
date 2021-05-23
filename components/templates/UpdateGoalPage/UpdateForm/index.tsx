@@ -10,10 +10,10 @@ import {
   import * as Yup from "yup";
   
   const schema = Yup.object({
-    title: Yup.string().required(),
-    deadline: Yup.date().required(),
-    description: Yup.string().required(),
-    qty: Yup.number().required()
+    title: Yup.string().required("Campo requerido"),
+    deadline: Yup.date().required("Campo requerido"),
+    description: Yup.string().required("Campo requerido"),
+    qty: Yup.number().required("Campo requerido")
   });
   
   export interface IValues {

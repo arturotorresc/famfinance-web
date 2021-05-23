@@ -10,8 +10,8 @@ import {
   import * as Yup from "yup";
   
   const schema = Yup.object({
-    oldPassword: Yup.string().required(),
-    newPassword: Yup.string().required(),
+    oldPassword: Yup.string().required("Campo requerido"),
+    newPassword: Yup.string().required("Campo requerido"),
   });
   
   export interface IValues {

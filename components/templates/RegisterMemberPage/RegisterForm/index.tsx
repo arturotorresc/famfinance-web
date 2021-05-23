@@ -13,14 +13,14 @@ import { Formik, FormikHelpers, Form, Field, FieldProps } from "formik";
 import * as Yup from "yup";
 
 const schema = Yup.object({
-  name: Yup.string().required(),
-  email: Yup.string().required(),
-  password: Yup.string().required(),
+  name: Yup.string().required("Campo requerido"),
+  email: Yup.string().required("Campo requerido"),
+  password: Yup.string().required("Campo requerido"),
   confirmPassword: Yup.string().oneOf(
     [Yup.ref("password"), null],
     "Las contraseñas no coinciden!"
   ),
-  familyId: Yup.string().required(),
+  familyId: Yup.string().required("Campo requerido"),
 });
 
 export interface IValues {
