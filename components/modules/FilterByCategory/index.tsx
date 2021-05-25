@@ -21,7 +21,7 @@ export function FilterByCategory(props: IProps) {
         <option value={SELECT_AN_OPTION_VALUE}>Sin filtro</option>
         {Object.keys(TransactionCategoryEnum).map((value) => {
           return (
-            <option value={value}>
+            <option value={value} key={value}>
               {translateCategory(value as TransactionCategoryEnum)}
             </option>
           );

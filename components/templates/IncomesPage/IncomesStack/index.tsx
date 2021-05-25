@@ -54,8 +54,6 @@ export default function IncomesStack({ categoryFilter }: IProps) {
     }
   );
 
-  console.log(data);
-
   const toast = useToast();
 
   const deleteMutation = useMutation((id: string) =>

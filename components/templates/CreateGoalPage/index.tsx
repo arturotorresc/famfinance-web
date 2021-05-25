@@ -3,6 +3,7 @@ import { useMutation } from "react-query";
 import fetcher from "../../../fetchers/fetcher";
 import { Flex, useToast } from "@chakra-ui/react";
 import CreateForm, { IValues } from "./CreateForm";
+import parseDate from "date-fns/parse";
 
 function formatDate(date: Date) {
   let day = date.getDate().toString();
@@ -40,12 +41,17 @@ export default function CreateGoalPage() {
               deadline: formatDate(new Date())
             }}
             onSubmit={(vals, actions) => {
+              const deadline = parseDate(
+                vals.deadline,
+                "dd-MM-yyyy",
+                new Date()
+              );
               mutation.mutate(
                 {
                   title: vals.title,
                   description: vals.description,
                   qty: vals.qty,
-                  deadline: vals.deadline
+                  deadline: deadline.toString(),
                 },
                 {
                   onSuccess: (res) => {

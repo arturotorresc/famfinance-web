@@ -98,7 +98,7 @@ export function TransactionCharts() {
     >
       {expenseData && expenseData.expenses.length > 0 && (
         <Box h="400px" w="800px">
-          <Text fontSize="2xl" mb={3} mt={10}>
+          <Text fontSize="2xl" mb={3} mt={10} style={{textAlign: "center"}}>
             Historial de tus gastos
           </Text>
           <Chart
@@ -111,7 +111,7 @@ export function TransactionCharts() {
       )}
       {incomeData && incomeData.incomes.length > 0 && (
         <Box pt={10} mt={12} h="400px" w="800px" pb={10}>
-          <Text fontSize="2xl" mb={3} mt={10}>
+          <Text fontSize="2xl" mb={3} mt={10} style={{textAlign: "center"}}>
             Historial de tus ingresos
           </Text>
           <Chart

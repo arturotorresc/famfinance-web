@@ -53,7 +53,6 @@ export default function HomePage() {
                   },
                   {
                     onSuccess: (res) => {
-                      console.log(res);
                       router.push("/dashboard");
                       actions.setSubmitting(false);
                     },
@@ -77,7 +76,7 @@ export default function HomePage() {
                 </Link>
               </Button>
               <Button padding="10px 0px 0px 0px" variant="link">
-                <Link href="/registerMember">
+                <Link href="/register-member">
                   <a>Únete a tu familia</a>
                 </Link>
               </Button>
