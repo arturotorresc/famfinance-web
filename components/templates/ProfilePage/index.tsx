@@ -78,10 +78,11 @@ export default function ProfilePage() {
                     >
                       <Form>
                         <HStack pt={6}>
-                          <Field name="name"
-                            render={({ field /* { name, value, onChange, onBlur } */ }) => (
+                          <Field name="name">
+                            {({ field }: any) => (
                               <Input {...field} type="text" placeholder="name" fontSize="3xl" width="30" />
-                            )}/>
+                            )}
+                          </Field>
                           <Button type="submit">Actualizar</Button>
                         </HStack>
                       </Form>
