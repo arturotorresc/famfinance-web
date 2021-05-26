@@ -25,6 +25,7 @@ export default function Dashboard() {
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const { isLoggedIn, queryClient } = await checkIfLoggedIn(ctx);
+  console.log("isLoggedIn: ", isLoggedIn);
   if (!isLoggedIn) {
     return redirectToLogin();
   }
