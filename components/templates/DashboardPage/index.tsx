@@ -18,12 +18,12 @@ export default function DashboardPage() {
       >
         Dashboard
       </Heading>
-      <Box mb={40}>
-        <TransactionCharts />
-      </Box>
       <Flex width="100%" justifyContent="space-around">
         <ForecastCharts />
       </Flex>
+      <Box mb={40}>
+        <TransactionCharts />
+      </Box>
     </Flex>
   );
 }

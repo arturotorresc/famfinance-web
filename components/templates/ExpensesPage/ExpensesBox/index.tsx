@@ -34,6 +34,26 @@ interface IProps{
     onUpdateClicked: (_id: string) => void
 }
 
+function englishCategoryToSpanish(category: string): string {
+  switch(category) {
+    case 'WORK': return 'Trabajo';
+    case 'FOOD': return 'Comida';
+    case 'ENTERTAINMENT': return 'Entretenimiento';
+    case 'MISC': return 'Miscelaneo';
+    case 'SUBSCRIPTION': return 'Suscripción';
+    default: return 'Desconocido';
+  }
+}
+
+function formatDate(date: Date) {
+  let day = date.getDate().toString();
+  let month = (date.getMonth() + 1).toString();
+  let year = date.getFullYear().toString();
+  if (day.length == 1) day = "0" + day;
+  if (month.length == 1) month = "0" + month;
+  return day + "-" + month + "-" + year;
+}
+
 export default function ExpensesBox(props: IProps){
     let selectedMonths = function (months: string[]){
         var monthsString = "";
@@ -70,7 +90,7 @@ export default function ExpensesBox(props: IProps){
                 <Heading fontSize="l">{frequency.frequencyType}</Heading>
                 <Text>Día de la Semana: {frequency.weekDay}</Text>
                 <Text>Frecuencia en Semanas: {frequency.weeksRepeat}</Text>
-                <Text>Meses</Text>
+                <Text>Meses Selectos:</Text>
                 <Text>{selectedMonths(frequency.months)}</Text>
               </Stack>
             );
@@ -87,7 +107,7 @@ export default function ExpensesBox(props: IProps){
               <Stack spacing={3}>
                 <Heading fontSize="l">{frequency.frequencyType}</Heading>
                 <Text>{frequency.startEndMonth}</Text>
-                <Text>Meses</Text>
+                <Text>Meses Selectos:</Text>
                 <Text>{selectedMonths(frequency.months)}</Text>
               </Stack>
             );
@@ -99,8 +119,8 @@ export default function ExpensesBox(props: IProps){
             <Flex>
                 <VStack flex="1" alignItems="left">
                     <Heading fontSize="xl">{props.title}</Heading>
-                    <Text>{props.from}</Text>
-                    <Text>{props.category} </Text>
+                    <Text>Desde: {formatDate(new Date(props.from))}</Text>
+                    <Text>Categoría: {englishCategoryToSpanish(props.category)}</Text>
                     {extraFields(props.frequency)}
                 </VStack>
                 <VStack flex="1" alignItems="left">

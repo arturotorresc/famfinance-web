@@ -11,12 +11,27 @@ import {
 } from "@chakra-ui/react";
 import { Formik, FormikHelpers, Form, Field, FieldProps } from "formik";
 import * as Yup from "yup";
+import parseDate from "date-fns/parse";
+import isDate from "date-fns/isDate";
 
 const schema = Yup.object({
-  title: Yup.string().required(),
-  description: Yup.string().required(),
-  qty: Yup.number().required(),
-  deadline: Yup.string().required()
+  title: Yup.string().required("Campo requerido"),
+  deadline: Yup.date()
+    .transform((val: any, originalVal: string | Date) => {
+      if (originalVal instanceof Date) {
+        return originalVal;
+      }
+      const parsedDate = isDate(originalVal)
+        ? originalVal
+        : parseDate(originalVal, "dd-MM-yyyy", new Date());
+      return parsedDate;
+    })
+    .required("Campo requerido")
+    .typeError("Introduzca una fecha válida en formato dd-mm-aaaa"),
+  description: Yup.string().required("Campo requerido"),
+  qty: Yup.number()
+    .min(0, "Introduzca un número no-negativo")
+    .required("Campo requerido"),
 });
 
 export interface IValues {
