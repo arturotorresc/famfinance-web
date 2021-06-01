@@ -57,8 +57,6 @@ export default function ExpensesStack({ categoryFilter }: IProps) {
     }
   );
 
-  console.log(data);
-
   const toast = useToast();
 
   const deleteMutation = useMutation((id: string) =>

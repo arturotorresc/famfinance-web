@@ -54,6 +54,7 @@ export default function RegisterMember() {
                         res.data.user.name,
                       status: "success",
                     });
+                    router.push("/");
                     actions.setSubmitting(false);
                   },
                   onError: (error) => {

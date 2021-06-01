@@ -5,6 +5,18 @@ import fetcher from "../../../fetchers/fetcher";
 import { useQuery, useMutation } from "react-query";
 import { PermissionCard } from "./PermissionCard";
 
+function policyInSpanish(policy: any): string {
+  switch (policy.toString()) {
+    case "EDIT_FAMILY_INCOME": return "Editar Ingresos";
+    case "EDIT_FAMILY_EXPENSE": return "Editar Gastos";
+    case "DELETE_FAMILY_INCOME": return "Borrar Ingresos";
+    case "DELETE_FAMILY_EXPENSE": return "Borrar Gastos";
+    case "CREATE_FAMILY_INCOME": return "Crear Ingresos";
+    case "CREATE_FAMILY_EXPENSE": return "Crear Gastos";
+    default: return "Permiso Desconocido";
+  }
+}
+
 export function AdminFamilyUserPageTemplate() {
   const router = useRouter();
   const { userId } = router.query;
@@ -106,7 +118,7 @@ export function AdminFamilyUserPageTemplate() {
                 }
               }}
               hasPermission={hasPermission}
-              permissionName={policy}
+              permissionName={policyInSpanish(policy)}
             />
           );
         })}

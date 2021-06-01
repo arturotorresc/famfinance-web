@@ -96,6 +96,7 @@ export default function UpdateGoal() {
                       status: "success",
                     });
                     actions.setSubmitting(false);
+                    router.back();
                   },
                   onError: (error) => {
                     toast({
