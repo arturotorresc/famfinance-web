@@ -14,8 +14,6 @@ export async function checkIfLoggedIn(
   ctx: GetServerSidePropsContext
 ): Promise<ICheckIfLoggedInRes> {
   const cookie = ctx.req.headers.cookie;
-  console.log("cookies: ", ctx.req.cookies);
-  console.log("cookie:", cookie);
   const fetchOpts = {
     headers: cookie
       ? {
@@ -30,7 +28,6 @@ export async function checkIfLoggedIn(
   const res = await fetcher.get("/me", {
     ...fetchOpts,
   });
-  console.log("res.data: ", res.data);
   if (res.data.user) {
     return { isLoggedIn: true, queryClient };
   }

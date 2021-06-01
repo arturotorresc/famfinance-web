@@ -241,6 +241,7 @@ export function TransactionFormPage(props: IProps) {
                           : "Gasto") + " actualizado",
                     });
                   }
+                  router.back();
                 },
                 onError: () => {
                   toast({ status: "error", title: "Ha ocurrido un error!" });

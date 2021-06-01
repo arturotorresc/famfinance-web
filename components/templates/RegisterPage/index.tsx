@@ -1,10 +1,12 @@
 import Head from "next/head";
+import { useRouter } from "next/router";
 import { useMutation } from "react-query";
 import fetcher from "../../../fetchers/fetcher";
 import { Flex, useToast } from "@chakra-ui/react";
 import RegisterForm, { IValues } from "./RegisterForm";
 
 export default function Register() {
+  const router = useRouter();
   const mutation = useMutation((userData: IValues) =>
     fetcher.post("/users", userData)
   );
@@ -47,6 +49,7 @@ export default function Register() {
                         res.data.user.name,
                       status: "success",
                     });
+                    router.push("/");
                     actions.setSubmitting(false);
                   },
                   onError: (error) => {

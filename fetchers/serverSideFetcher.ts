@@ -3,7 +3,6 @@ import { GetServerSidePropsContext } from "next";
 
 export function createServerSideFetcher(ctx: GetServerSidePropsContext) {
   const cookie = ctx.req.headers.cookie;
-  console.log("cookie: ", cookie);
   const fetcher = axios.create({
     baseURL: process.env.NEXT_PUBLIC_BACKEND_URL,
     withCredentials: true,

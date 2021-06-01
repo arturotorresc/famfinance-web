@@ -1,4 +1,5 @@
 import Head from "next/head";
+import { useRouter } from "next/router";
 import { useMutation } from "react-query";
 import fetcher from "../../../fetchers/fetcher";
 import { Flex, useToast } from "@chakra-ui/react";
@@ -15,6 +16,7 @@ function formatDate(date: Date) {
 }
 
 export default function CreateGoalPage() {
+  const router = useRouter();
   const mutation = useMutation((userData: IValues) =>
     fetcher.post("/goal", userData)
   );
@@ -60,6 +62,7 @@ export default function CreateGoalPage() {
                       description: "Se ha agregado una nueva meta exitosamente",
                       status: "success",
                     });
+                    router.back();
                     actions.setSubmitting(false);
                   },
                   onError: (error) => {
